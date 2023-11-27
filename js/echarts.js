@@ -121,19 +121,6 @@ function echarts02(){
 	//myChart.setOption(option);
 	
 }
-	function readAsText(path,f){
-		/*
-		读取本地文件，
-		受限于安全性，浏览器必须通过<input type="file" onchange="readFile(this.files)"/>让用户手动选择文件,
-		然后将this.files作为入参path传入，入参f为读取成功后的回调函数
-		*/
-		var reader=new FileReader();
-		reader.readAsText(path[0]);
-		reader.onload=function(data){
-			console.log('Z: 文件-'+path[0].name+'-读取成功');
-			f(data.target.result);
-		};
-	}
 
 function getRankAndChoiceData(){
 	//获得JSON数据
@@ -152,16 +139,9 @@ function getRankAndChoiceData(){
 		}
 		return rankAndChoice;
 		//返回排名和咖啡选择数组
+		
 	});
 }
-//计算0级评级选ABCD的人数
-function calculate0Rank()
-{
-	var zero=[];
-	var rankAndChoice = getRankAndChoiceData();
-	for(var i=0;i<rankAndChoice.length;i++){
 
-	}
-}
 		
 		
