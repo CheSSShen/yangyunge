@@ -1,0 +1,17 @@
+body{
+	background: #372115;
+}
+#pictrue1{
+	background-color: skyblue;
+	width: 1000px;height:600px;
+	top: 10%;
+	left: 10px;
+	position: absolute;
+}
+#pictrue2{
+	background-color: aliceblue;
+	width: 300px;height:300px;
+	top: 10%;
+	right: 500px;
+	position: absolute;
+}
