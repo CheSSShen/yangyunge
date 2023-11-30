@@ -4,7 +4,7 @@ function readFile(files) {
 
 			var results = Papa.parse(data, {
 				header: true, // 如果你的CSV文件包含表头，设置为true
-				dynamicTyping: false, // 如果你希望自动将字符串转换为数字或日期，设置为true
+				dynamicTyping: true, // 如果你希望自动将字符串转换为数字或日期，设置为true
 			});
 
 			var totalTestersNumber = 0; //测试者总数
@@ -41,7 +41,7 @@ function readFile(files) {
 			每种自评专业等级下，四种偏爱口味分别占多少人。
 			形如：
 			{
-				level: 1,
+				keyWord: 1,
 				coffeeA: 20,
 				coffeeB: 19,
 				coffeeC: 60,
@@ -50,40 +50,30 @@ function readFile(files) {
 			*/
 			for (var i = 0; i < 10; i++) {
 				var cur = {
-					level: i + 1,
-					coffeeA: 0,
-					coffeeB: 0,
-					coffeeC: 0,
-					coffeeD: 0,
+					keyWord: i + 1,
 				}
 				levelPreference.push(cur);
 			}
-			for (var i = 0; i < results.data.length; i++) {
-				var level = results.data[i]["Lastly, how would you rate your own coffee expertise?"];
-				var choice = results.data[i]["Lastly, what was your favorite overall coffee?"];
-				if (level && choice) {
-					switch (choice) {
-						case "Coffee A":
-							levelPreference[Number(level) - 1].coffeeA++;
-							break;
-						case "Coffee B":
-							levelPreference[Number(level) - 1].coffeeB++;
-							break;
-						case "Coffee C":
-							levelPreference[Number(level) - 1].coffeeC++;
-							break;
-						case "Coffee D":
-							levelPreference[Number(level) - 1].coffeeD++;
-							break;
-					}
-				}
-
+			processTwoColValueDict(results, "Lastly, how would you rate your own coffee expertise?",
+				"Lastly, what was your favorite overall coffee?", levelPreference);
+			//---------------------------自认为偏好的烘焙度与实际的口味偏好------------------------
+			var rP = getMyCol(results, "What roast level of coffee do you prefer?");
+			var roastPreference = getNorepeatKeyWordsDict(rP);
+			/*
+			形如：{
+				keyWord:"Light",
+				num:100,
+				coffeeA:0,
+				coffeeB:0,
+				coffeeC:0,
+				coffeeD:0,
 			}
-			//---------------------------自认为偏好的烘焙度与口味偏好------------------------
-			//var rP = getMyCol(results,"What roast level of coffee do you prefer");
-			//var roastPreference = getNorepeatKeyWordsDict(rp);
-			//processTwoColValueDict(results, "What roast level of coffee do you prefer?",
-			//	"Lastly, what was your favorite overall coffee?", roastPreference);
+			*/
+			roastPreference = processTwoColValueDict(results, "What roast level of coffee do you prefer?",
+				"Lastly, what was your favorite overall coffee?", roastPreference);
+			console.log(roastPreference);
+			console.log(favoriteDrink);
+			//---------------------------ECHARTS部分------------------------
 			echarts01(levelPreference);
 		});
 }
@@ -142,27 +132,50 @@ function getNorepeatKeyWordsDict(columnValues) { //获取某列数组中，按�
 	return ret;
 }
 
-function processTwoColValueDict(results, col1, col2, dict) {
+function processTwoColValueDict(results, col1, col2, dic) {
+	var dict = dic;
+	/*
+	{
+		keyWord:"Lattee",
+		num:100,
+	}
+	*/
 	for (var i = 0; i < results.data.length; i++) {
 		var col1Value = results.data[i][col1];
 		var col2Value = results.data[i][col2];
-		if (col1Value && col2Value) {
+		var index = -1;
+		for (var j = 0; j < dict.length; j++) { //遍历关键词字典
+			if (col1Value && dict[j].keyWord == col1Value) {
+				index = j; //取出co1Value对应字典中的索引是多少
+				break;
+			}
+		}
+		if (index != -1 && dict[index].coffeeA == undefined) { //在该字典元素中添加新的键值对，并判断该元素是否已经添加过一遍新键值对。
+			dict[index].coffeeA = 0;
+			dict[index].coffeeB = 0;
+			dict[index].coffeeC = 0;
+			dict[index].coffeeD = 0;
+		}
+
+
+		if (index != -1 && col1Value && col2Value) {
 			switch (col2Value) {
 				case "Coffee A":
-					dict[dict.indexOf(col1Value)].coffeeA++;
+					dict[index].coffeeA++;
 					break;
 				case "Coffee B":
-					dict[dict.indexOf(col1Value)].coffeeB++;
+					dict[index].coffeeB++;
 					break;
 				case "Coffee C":
-					dict[dict.indexOf(col1Value)].coffeeC++;
+					dict[index].coffeeC++;
 					break;
 				case "Coffee D":
-					dict[dict.indexOf(col1Value)].coffeeD++;
+					dict[index].coffeeD++;
 					break;
 			}
 		}
 	}
+	return dict;
 
 }
 
