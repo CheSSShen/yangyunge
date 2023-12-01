@@ -13,10 +13,10 @@ function readFile(files) {
 					totalTestersNumber++;
 				};
 			})
-			//---------------------------男女比例------------------------
+			//---------------------------男女比例(饼图)------------------------
 			var malePercent = getColKeyWorsNum(results, 'Gender', 'Male');
 			var femalePercent = getColKeyWorsNum(results, 'Gender', 'Female');
-			//---------------------------在家煮咖啡的方式------------------------
+			//---------------------------在家煮咖啡的方式（条形图）------------------------
 			var hBAH = getMyCol(results, "How do you brew coffee at home?"); //每个人的回答，回答中可能有多个关键词
 			var finalHowBrewAtHome = getNorepeatKeyWordsDict(hBAH);
 			/* 
@@ -35,6 +35,9 @@ function readFile(files) {
 				num:500,
 			}
 		   */
+			//---------------------------饮用咖啡的原因------------------------
+			var dR = getMyCol(results, "Why do you drink coffee?");
+			var drinkReason = getNorepeatKeyWordsDict(dR);
 			//---------------------------自评专业等级与口味偏好------------------------
 			var levelPreference = [];
 			/*
@@ -71,8 +74,30 @@ function readFile(files) {
 			*/
 			roastPreference = processTwoColValueDict(results, "What roast level of coffee do you prefer?",
 				"Lastly, what was your favorite overall coffee?", roastPreference);
-			console.log(roastPreference);
-			console.log(favoriteDrink);
+			//---------------------------自认为偏好的形容词与实际的口味偏好------------------------
+			var descriptorPreference = getNorepeatKeyWordsDict(getMyCol(results,
+				"Before today's tasting, which of the following best described what kind of coffee you like?"
+			));
+			descriptorPreference = processTwoColValueDict(results,
+				"Before today's tasting, which of the following best described what kind of coffee you like?",
+				"Lastly, what was your favorite overall coffee?",
+				descriptorPreference
+			);
+			//---------------------------四类咖啡的词云------------------------
+			var coffeeA_Notes = getNorepeatKeyWordsDict(getMyCol(results, "Coffee A - Notes"));
+			processNotes(coffeeA_Notes);
+			/*
+			{
+				keyWord:"Fruity",
+				num:200
+			}
+			*/
+			var coffeeB_Notes = getNorepeatKeyWordsDict(getMyCol(results, "Coffee B - Notes"));
+			processNotes(coffeeB_Notes);
+			var coffeeC_Notes = getNorepeatKeyWordsDict(getMyCol(results, "Coffee C - Notes"));
+			processNotes(coffeeC_Notes);
+			var coffeeD_Notes = getNorepeatKeyWordsDict(getMyCol(results, "Coffee D - Notes"));
+			processNotes(coffeeD_Notes);
 			//---------------------------ECHARTS部分------------------------
 			echarts01(levelPreference);
 		});
@@ -176,148 +201,154 @@ function processTwoColValueDict(results, col1, col2, dic) {
 		}
 	}
 	return dict;
-
 }
 
-function echarts01(data){
+function processNotes(notes) //取出现了十次以上的描述
+{
+	for (var i = 0; i < notes.length; i++) {
+		var cur = notes[i];
+		if (cur.num < 10) {
+			notes.splice(i, i + 1); //删除索引为i的元素
+			i = i - 1;
+		}
+	}
+}
+
+function echarts01(data) {
 	var myChart = echarts.init(document.getElementById('pictrue1'));
 	// 指定图表的配置项和数据
 	var option = {
-		title:{
-			show:true,
-			text:"Coffee Rank",
-			textStyle:{
-				fontStyle:'italic',
-				fontSize:25,
-				color:'#fff'
+		title: {
+			show: true,
+			text: "Coffee Rank",
+			textStyle: {
+				fontStyle: 'italic',
+				fontSize: 25,
+				color: '#fff'
 			},
 		},
 		tooltip: {
-		  trigger: 'axis',
-		  axisPointer: {
-			// Use axis to trigger tooltip
-			type: 'shadow', // 'shadow' as default; can also be 'line' or 'shadow'
-			label:{
-				formatter: function (params) {
-					return "Coffee Expertise Level:" + params.value;
-				  },
+			trigger: 'axis',
+			axisPointer: {
+				// Use axis to trigger tooltip
+				type: 'shadow', // 'shadow' as default; can also be 'line' or 'shadow'
+				label: {
+					formatter: function(params) {
+						return "Coffee Expertise Level:" + params.value;
+					},
+				}
 			}
-		  }
 		},
 		legend: {
-			right:'5%',
-			textStyle:{
-				color:'#fff'
+			right: '5%',
+			textStyle: {
+				color: '#fff'
 			}
 		},
 		grid: {
-		  left: '3%',
-		  right: '4%',
-		  bottom: '3%',
-		  containLabel: true,
-		  top:'5%'
+			left: '3%',
+			right: '4%',
+			bottom: '3%',
+			containLabel: true,
+			top: '5%'
 		},
 		xAxis: {
-		  type: 'category',
-		  data:[1,2,3,4,5,6,7,8,9,10],
-		  axisLabel:{
-			color:"rgba(255, 255, 255, 1)",
-			fontFamily:'Courier New',
-			fontSize:15
-		  },
-		  axisLine:{
-			lineStyle:{
-				color:'#fff'
-			}
-		  },
-		  axisTick:{
-			show:false, //隐藏坐标轴的刻度
+			type: 'category',
+			data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+			axisLabel: {
+				color: "rgba(255, 255, 255, 1)",
+				fontFamily: 'Courier New',
+				fontSize: 15
+			},
+			axisLine: {
+				lineStyle: {
+					color: '#fff'
+				}
+			},
+			axisTick: {
+				show: false, //隐藏坐标轴的刻度
 			},
 		},
 		yAxis: {
-			show:false,
+			show: false,
 		},
-		series: [
-		  {
-			name: 'A',
-			type: 'bar',
-			stack: 'total',
-			label: {
-			  show: true,
-			  formatter:'{a}'
+		series: [{
+				name: 'A',
+				type: 'bar',
+				stack: 'total',
+				label: {
+					show: true,
+					formatter: '{a}'
+				},
+				emphasis: {
+					focus: 'series'
+				},
+				data: []
 			},
-			emphasis: {
-			  focus: 'series'
-			},
-			data: []
-		  },
-		  {
-			name: 'B',
-			type: 'bar',
-			stack: 'total',
-			label: {
-			  show: true,
-			  formatter:'{a}'
-			},
-			emphasis: {
-			  focus: 'series'
-			},
-			data: []
-		  },
-		  {
-			name: 'C',
-			type: 'bar',
-			stack: 'total',
-			label: {
-			  show: true,
-			  formatter:'{a}'
-			},
-			emphasis: {
-			  focus: 'series'
-			},
-			data: []
-		  },
-		  {
-			name: 'D',
-			type: 'bar',
-			stack: 'total',
-			label: {
-			  show: true,
-			  formatter:'{a}'
-			},
-			emphasis: {
-			  focus: 'series'
-			},
-			data: []
-		  }
-		]
-	  };
-	  for(var i=0;i<4;i++){
-		for(var j=0;j<10;j++){
-			var allNum = (data[j].coffeeA+data[j].coffeeB+data[j].coffeeC+data[j].coffeeD);
-			if(i==0)
 			{
-				option.series[i].data.push((data[j].coffeeA/allNum *100).toFixed(2));
-			}else if(i==1){
-				option.series[i].data.push((data[j].coffeeB/allNum *100).toFixed(2));
-			}else if(i==2){
-				option.series[i].data.push((data[j].coffeeC/allNum *100).toFixed(2));
-			}else{
-				option.series[i].data.push((data[j].coffeeD/allNum *100).toFixed(2));
+				name: 'B',
+				type: 'bar',
+				stack: 'total',
+				label: {
+					show: true,
+					formatter: '{a}'
+				},
+				emphasis: {
+					focus: 'series'
+				},
+				data: []
+			},
+			{
+				name: 'C',
+				type: 'bar',
+				stack: 'total',
+				label: {
+					show: true,
+					formatter: '{a}'
+				},
+				emphasis: {
+					focus: 'series'
+				},
+				data: []
+			},
+			{
+				name: 'D',
+				type: 'bar',
+				stack: 'total',
+				label: {
+					show: true,
+					formatter: '{a}'
+				},
+				emphasis: {
+					focus: 'series'
+				},
+				data: []
+			}
+		]
+	};
+	for (var i = 0; i < 4; i++) {
+		for (var j = 0; j < 10; j++) {
+			var allNum = (data[j].coffeeA + data[j].coffeeB + data[j].coffeeC + data[j].coffeeD);
+			if (i == 0) {
+				option.series[i].data.push((data[j].coffeeA / allNum * 100).toFixed(2));
+			} else if (i == 1) {
+				option.series[i].data.push((data[j].coffeeB / allNum * 100).toFixed(2));
+			} else if (i == 2) {
+				option.series[i].data.push((data[j].coffeeC / allNum * 100).toFixed(2));
+			} else {
+				option.series[i].data.push((data[j].coffeeD / allNum * 100).toFixed(2));
 			}
 		}
-	  }
+	}
 	// 使用刚指定的配置项和数据显示图表。
 	myChart.setOption(option);
 }
-function getRankAndChoiceData(){
+
+function getRankAndChoiceData() {
 	//获得JSON数据
 	$.getJSON("coffeeRank.json", function(data) {
 		//console.log(data[0]);
-		
-		
+
+
 	});
 }
-
-		
-		
