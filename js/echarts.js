@@ -26,7 +26,7 @@ function readFile(files) {
 				num:500,
 			}
 			*/
-			//---------------------------最爱的咖啡饮品------------------------
+			//---------------------------最爱的咖啡饮品(雷达图)------------------------
 			var fD = getMyCol(results, "What is your favorite coffee drink?");
 			var favoriteDrink = getNorepeatKeyWordsDict(fD);
 			/*
@@ -35,10 +35,10 @@ function readFile(files) {
 				num:500,
 			}
 		   */
-			//---------------------------饮用咖啡的原因------------------------
+			//---------------------------饮用咖啡的原因（南丁格尔玫瑰图）------------------------
 			var dR = getMyCol(results, "Why do you drink coffee?");
 			var drinkReason = getNorepeatKeyWordsDict(dR);
-			//---------------------------自评专业等级与口味偏好------------------------
+			//---------------------------自评专业等级与口味偏好（堆叠条形图）------------------------
 			var levelPreference = [];
 			/*
 			每种自评专业等级下，四种偏爱口味分别占多少人。
@@ -59,7 +59,7 @@ function readFile(files) {
 			}
 			processTwoColValueDict(results, "Lastly, how would you rate your own coffee expertise?",
 				"Lastly, what was your favorite overall coffee?", levelPreference);
-			//---------------------------自认为偏好的烘焙度与实际的口味偏好------------------------
+			//---------------------------自认为偏好的烘焙度与实际的口味偏好(旭日图)------------------------
 			var rP = getMyCol(results, "What roast level of coffee do you prefer?");
 			var roastPreference = getNorepeatKeyWordsDict(rP);
 			/*
@@ -74,7 +74,7 @@ function readFile(files) {
 			*/
 			roastPreference = processTwoColValueDict(results, "What roast level of coffee do you prefer?",
 				"Lastly, what was your favorite overall coffee?", roastPreference);
-			//---------------------------自认为偏好的形容词与实际的口味偏好------------------------
+			//---------------------------自认为偏好的形容词与实际的口味偏好（日历图）------------------------
 			var descriptorPreference = getNorepeatKeyWordsDict(getMyCol(results,
 				"Before today's tasting, which of the following best described what kind of coffee you like?"
 			));
@@ -83,7 +83,7 @@ function readFile(files) {
 				"Lastly, what was your favorite overall coffee?",
 				descriptorPreference
 			);
-			//---------------------------四类咖啡的词云------------------------
+			//---------------------------四类咖啡的词云（词云图）------------------------
 			var coffeeA_Notes = getNorepeatKeyWordsDict(getMyCol(results, "Coffee A - Notes"));
 			processNotes(coffeeA_Notes);
 			/*
@@ -100,6 +100,7 @@ function readFile(files) {
 			processNotes(coffeeD_Notes);
 			//---------------------------ECHARTS部分------------------------
 			echarts01(levelPreference);
+			echartsGenderRatio(malePercent, femalePercent);
 		});
 }
 
@@ -214,6 +215,55 @@ function processNotes(notes) //取出现了十次以上的描述
 	}
 }
 
+function echartsGenderRatio(male, female) {
+	var myChart = echarts.init(document.getElementById('pictrue2'));
+	option = {
+		title: {
+			text: 'Gender Ratio',
+			textStyle: {
+				fontSize: 13,
+				color: '#412d24',
+			},
+			bottom: '10%',
+			left: 'center',
+
+		},
+		tooltip: {
+			trigger: 'item'
+		},
+		legend: {
+			orient: 'horizontal',
+			center: 'center',
+		},
+		series: [{
+			name: 'Gender',
+			type: 'pie',
+			color: [
+				'#43476d',
+				'#6d4347',
+			],
+			radius: '40%',
+			data: [{
+					value: male,
+					name: 'Male'
+				},
+				{
+					value: female,
+					name: 'Female'
+				},
+			],
+			emphasis: {
+				itemStyle: {
+					shadowBlur: 10,
+					shadowOffsetX: 0,
+					shadowColor: 'rgba(0, 0, 0, 0.5)'
+				}
+			}
+		}]
+	};
+	myChart.setOption(option);
+}
+
 function echarts01(data) {
 	var myChart = echarts.init(document.getElementById('pictrue1'));
 	// 指定图表的配置项和数据
@@ -224,7 +274,7 @@ function echarts01(data) {
 			textStyle: {
 				fontStyle: 'italic',
 				fontSize: 25,
-				color: '#fff'
+				color: '#412d24',
 			},
 		},
 		tooltip: {
@@ -242,7 +292,7 @@ function echarts01(data) {
 		legend: {
 			right: '5%',
 			textStyle: {
-				color: '#fff'
+				color: '#412d24',
 			}
 		},
 		grid: {
@@ -256,13 +306,13 @@ function echarts01(data) {
 			type: 'category',
 			data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 			axisLabel: {
-				color: "rgba(255, 255, 255, 1)",
+				color: '#412d24',
 				fontFamily: 'Courier New',
 				fontSize: 15
 			},
 			axisLine: {
 				lineStyle: {
-					color: '#fff'
+					color: '#412d24',
 				}
 			},
 			axisTick: {
