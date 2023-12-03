@@ -13,10 +13,10 @@ function readFile(files) {
 					totalTestersNumber++;
 				};
 			})
-			//---------------------------男女比例------------------------
+			//---------------------------男女比例(饼图)------------------------
 			var malePercent = getColKeyWorsNum(results, 'Gender', 'Male');
 			var femalePercent = getColKeyWorsNum(results, 'Gender', 'Female');
-			//---------------------------在家煮咖啡的方式------------------------
+			//---------------------------在家煮咖啡的方式（条形图）------------------------
 			var hBAH = getMyCol(results, "How do you brew coffee at home?"); //每个人的回答，回答中可能有多个关键词
 			var finalHowBrewAtHome = getNorepeatKeyWordsDict(hBAH);
 			/* 
@@ -35,6 +35,9 @@ function readFile(files) {
 				num:500,
 			}
 		   */
+			//---------------------------饮用咖啡的原因------------------------
+			var dR = getMyCol(results, "Why do you drink coffee?");
+			var drinkReason = getNorepeatKeyWordsDict(dR);
 			//---------------------------自评专业等级与口味偏好------------------------
 			var levelPreference = [];
 			/*
@@ -71,8 +74,30 @@ function readFile(files) {
 			*/
 			roastPreference = processTwoColValueDict(results, "What roast level of coffee do you prefer?",
 				"Lastly, what was your favorite overall coffee?", roastPreference);
-			console.log(roastPreference);
-			console.log(favoriteDrink);
+			//---------------------------自认为偏好的形容词与实际的口味偏好------------------------
+			var descriptorPreference = getNorepeatKeyWordsDict(getMyCol(results,
+				"Before today's tasting, which of the following best described what kind of coffee you like?"
+			));
+			descriptorPreference = processTwoColValueDict(results,
+				"Before today's tasting, which of the following best described what kind of coffee you like?",
+				"Lastly, what was your favorite overall coffee?",
+				descriptorPreference
+			);
+			//---------------------------四类咖啡的词云------------------------
+			var coffeeA_Notes = getNorepeatKeyWordsDict(getMyCol(results, "Coffee A - Notes"));
+			processNotes(coffeeA_Notes);
+			/*
+			{
+				keyWord:"Fruity",
+				num:200
+			}
+			*/
+			var coffeeB_Notes = getNorepeatKeyWordsDict(getMyCol(results, "Coffee B - Notes"));
+			processNotes(coffeeB_Notes);
+			var coffeeC_Notes = getNorepeatKeyWordsDict(getMyCol(results, "Coffee C - Notes"));
+			processNotes(coffeeC_Notes);
+			var coffeeD_Notes = getNorepeatKeyWordsDict(getMyCol(results, "Coffee D - Notes"));
+			processNotes(coffeeD_Notes);
 			//---------------------------ECHARTS部分------------------------
 			echarts01(levelPreference);
 		});
@@ -176,7 +201,17 @@ function processTwoColValueDict(results, col1, col2, dic) {
 		}
 	}
 	return dict;
+}
 
+function processNotes(notes) //取出现了十次以上的描述
+{
+	for (var i = 0; i < notes.length; i++) {
+		var cur = notes[i];
+		if (cur.num < 10) {
+			notes.splice(i, i + 1); //删除索引为i的元素
+			i = i - 1;
+		}
+	}
 }
 
 function echarts01(data) {
@@ -198,7 +233,7 @@ function echarts01(data) {
 				// Use axis to trigger tooltip
 				type: 'shadow', // 'shadow' as default; can also be 'line' or 'shadow'
 				label: {
-					formatter: function (params) {
+					formatter: function(params) {
 						return "Coffee Expertise Level:" + params.value;
 					},
 				}
@@ -237,8 +272,7 @@ function echarts01(data) {
 		yAxis: {
 			show: false,
 		},
-		series: [
-			{
+		series: [{
 				name: 'A',
 				type: 'bar',
 				stack: 'total',
