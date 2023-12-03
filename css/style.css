@@ -4,8 +4,8 @@ body {
 
 #pictrue1 {
 	background-color: #d3b795;
-	width: 500px;
-	height: 400px;
+	width: 300px;
+	height: 200px;
 	top: 10%;
 	left: 10px;
 	position: absolute;
@@ -23,7 +23,15 @@ body {
 	background-color: #d3b795;
 	width: 700px;
 	height:500px;
-	top: 20%;
+	top: 0%;
 	right: 30%;
+	position: absolute;
+}
+#sunburst{
+	background-color: #ffffff;
+	width: 800px;
+	height:800px;
+	top: 10%;
+	right: 40%;
 	position: absolute;
 }
