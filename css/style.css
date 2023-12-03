@@ -19,3 +19,12 @@ body {
 	right: 10px;
 	position: absolute;
 }
+
+#pictrue3 {
+	background-color: #d3b795;
+	width: 500px;
+	height: 500px;
+	top: 10%;
+	right:20%;
+	position: absolute;
+}

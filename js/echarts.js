@@ -101,6 +101,7 @@ function readFile(files) {
 			//---------------------------ECHARTS部分------------------------
 			echarts01(levelPreference);
 			echartsGenderRatio(malePercent, femalePercent);
+			echartsBrewingMethod(finalHowBrewAtHome);
 		});
 }
 
@@ -259,6 +260,51 @@ function echartsGenderRatio(male, female) {
 					shadowColor: 'rgba(0, 0, 0, 0.5)'
 				}
 			}
+		}]
+	};
+	myChart.setOption(option);
+}
+
+function echartsBrewingMethod(data) {
+	var myChart = echarts.init(document.getElementById('pictrue3'));
+	var myXAxisData = [];
+	var mySeriesData = [];
+	for(var i = 0; i < data.length; i++)
+	{
+		var cur = data[i];
+		myXAxisData.push(cur.keyWord);
+		mySeriesData.push(cur.num);
+	}
+	option = {
+		title: {
+			text: "Preferred brewing method",
+			textStyle: {
+				fontSize: 18,
+				color: '#412d24',
+			},
+			bottom: '0%',
+			left: 'center',
+		},
+		tooltip: {
+			show: true,
+			trigger: 'axis',
+		},
+		xAxis: {
+			type: 'category',
+			data: myXAxisData,
+		},
+		yAxis: {
+			type: 'value'
+		},
+		series: [{
+			color: [
+				'#43476d',
+				'#6d4347',
+
+			],
+			data: mySeriesData,
+			type: 'bar',
+			colorBy: 'data',
 		}]
 	};
 	myChart.setOption(option);
