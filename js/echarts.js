@@ -102,6 +102,8 @@ function readFile(files) {
 			echarts01(levelPreference);
 			echartsGenderRatio(malePercent, femalePercent);
 			echartsBrewingMethod(finalHowBrewAtHome);
+			echartsFavoriteDrink(favoriteDrink);
+			//echarts02(coffeeA_Notes);
 		});
 }
 
@@ -209,15 +211,27 @@ function processNotes(notes) //取出现了十次以上的描述
 {
 	for (var i = 0; i < notes.length; i++) {
 		var cur = notes[i];
-		if (cur.num < 10) {
+		if (cur.num < 3) {
 			notes.splice(i, i + 1); //删除索引为i的元素
 			i = i - 1;
 		}
 	}
 }
 
+function sortArr(myData) {
+	for (var i = 0; i < myData.length - 1; i++) {
+		for (var j = 0; j < myData.length - i - 1; j++) {
+			if (myData[j + 1].num > myData[j].num) {
+				var tmp = myData[j];
+				myData[j] = myData[j + 1];
+				myData[j + 1] = tmp;
+			}
+		}
+	}
+}
+
 function echartsGenderRatio(male, female) {
-	var myChart = echarts.init(document.getElementById('pictrue2'));
+	var myChart = echarts.init(document.getElementById('genderRatio'));
 	option = {
 		title: {
 			text: 'Gender Ratio',
@@ -230,7 +244,9 @@ function echartsGenderRatio(male, female) {
 
 		},
 		tooltip: {
-			trigger: 'item'
+			show: true,
+			trigger: 'item',
+			formatter: '{b} : {d}%',
 		},
 		legend: {
 			orient: 'horizontal',
@@ -240,8 +256,8 @@ function echartsGenderRatio(male, female) {
 			name: 'Gender',
 			type: 'pie',
 			color: [
-				'#43476d',
-				'#6d4347',
+				'#5470c6',
+				'#ee6666',
 			],
 			radius: '40%',
 			data: [{
@@ -250,7 +266,7 @@ function echartsGenderRatio(male, female) {
 				},
 				{
 					value: female,
-					name: 'Female'
+					name: 'Female',
 				},
 			],
 			emphasis: {
@@ -266,23 +282,25 @@ function echartsGenderRatio(male, female) {
 }
 
 function echartsBrewingMethod(data) {
-	var myChart = echarts.init(document.getElementById('pictrue3'));
+	var myChart = echarts.init(document.getElementById('brewMethod'));
+	sortArr(data);
 	var myXAxisData = [];
 	var mySeriesData = [];
-	for(var i = 0; i < data.length; i++)
-	{
+	for (var i = 0; i < data.length; i++) {
 		var cur = data[i];
 		myXAxisData.push(cur.keyWord);
 		mySeriesData.push(cur.num);
 	}
+
+
 	option = {
 		title: {
 			text: "Preferred brewing method",
 			textStyle: {
-				fontSize: 18,
+				fontSize: 13,
 				color: '#412d24',
 			},
-			bottom: '0%',
+			bottom: '10%',
 			left: 'center',
 		},
 		tooltip: {
@@ -290,18 +308,26 @@ function echartsBrewingMethod(data) {
 			trigger: 'axis',
 		},
 		xAxis: {
+			show: true,
 			type: 'category',
+			axisLabel: {
+				show: false,
+			},
+			axisTick: {
+				alignWithLabel: true
+			},
 			data: myXAxisData,
 		},
 		yAxis: {
-			type: 'value'
+			type: 'value',
+			show: false,
+			alignTicks: true,
 		},
 		series: [{
-			color: [
-				'#43476d',
-				'#6d4347',
-
-			],
+			label: {
+				show: true,
+				position: 'insideTop',
+			},
 			data: mySeriesData,
 			type: 'bar',
 			colorBy: 'data',
@@ -310,16 +336,71 @@ function echartsBrewingMethod(data) {
 	myChart.setOption(option);
 }
 
+function echartsFavoriteDrink(data) {
+	var myChart = echarts.init(document.getElementById('favoriteDrink'));
+	sortArr(data);
+	var myData = [];
+	for (var i = 0; i < 8; i++) {
+		var cur = {
+			value: data[i].num,
+			name: data[i].keyWord,
+		}
+		myData.push(cur);
+	}
+
+	option = {
+		title: {
+			text: "Favorite Coffee Drink",
+			textStyle: {
+				fontSize: 13,
+				color: '#412d24',
+			},
+			bottom: '15%',
+			left: 'center',
+		},
+		tooltip: {
+			show: true,
+			trigger: 'item',
+			formatter: '{b} : {d}%',
+		},
+		series: [{
+			label: {
+				show: true,
+				position:'inside',
+				fontSize:8,
+				rotate:-20,
+			},
+			emphasis: {
+				label: {
+					show: true
+				},
+				scale:true,
+				scaleSize :15,
+				focus: 'series',
+				blurScope: 'coordinateSystem',
+			},
+			type: 'pie',
+			radius: [30, 130],
+			roseType: 'area',
+			itemStyle: {
+				borderRadius: 5,
+			},
+			data: myData,
+		}]
+	};
+	myChart.setOption(option);
+}
+
 function echarts01(data) {
-	var myChart = echarts.init(document.getElementById('pictrue1'));
+	var myChart = echarts.init(document.getElementById('expertise'));
 	// 指定图表的配置项和数据
 	var option = {
 		title: {
 			show: true,
-			text: "Coffee Rank",
+			text: "Expertise Level\nWith Preference",
+			left:'10%',
 			textStyle: {
-				fontStyle: 'italic',
-				fontSize: 25,
+				fontSize: 13,
 				color: '#412d24',
 			},
 		},
@@ -336,7 +417,7 @@ function echarts01(data) {
 			}
 		},
 		legend: {
-			right: '5%',
+			right:'0%',
 			textStyle: {
 				color: '#412d24',
 			}
@@ -354,15 +435,18 @@ function echarts01(data) {
 			axisLabel: {
 				color: '#412d24',
 				fontFamily: 'Courier New',
-				fontSize: 15
+				fontSize: 12,
+				margin:5,
 			},
 			axisLine: {
 				lineStyle: {
 					color: '#412d24',
 				}
 			},
+
 			axisTick: {
 				show: false, //隐藏坐标轴的刻度
+				alignWithLabel: true,
 			},
 		},
 		yAxis: {
@@ -440,11 +524,89 @@ function echarts01(data) {
 	myChart.setOption(option);
 }
 
-function getRankAndChoiceData() {
-	//获得JSON数据
-	$.getJSON("coffeeRank.json", function(data) {
-		//console.log(data[0]);
+function echarts02(data) {
+	var myChart = echarts.init(document.getElementById('wordcloud'));
+	var keywords = [];
+	for (var i = 0; i < data.length; i++) {
+		var cur = {
+			"name": data[i].keyWord,
+			"value": data[i].num,
+		}
+		keywords.push(cur);
+	}
+	var option = {
+		series: [{
+			// type: 'wordCloud',
+			// //maskImage: maskImage,
+			// sizeRange: [12, 60],
+			// rotationRange: [0, 0],
+			// rotationStep: 45,
+			// gridSize: 3,
+			// drawOutOfBound:false,
+			// shape: 'pentagon',
+			// width: '80%',
+			// height: '75%',
+			// textStyle: {
+			// 	normal: {
+			// 		color: function () {
+			// 			return 'rgb(' + [
+			// 				Math.round(Math.random() * 160),
+			// 				Math.round(Math.random() * 160),
+			// 				Math.round(Math.random() * 160)
+			// 			].join(',') + ')';
+			// 		},
+			// 		fontFamily: 'sans-serif',
+			// 		fontWeight: 'normal'
+			// 	},
+			// 	emphasis: {
+			// 		shadowBlur: 10,
+			// 		shadowColor: '#333'
+			// 	}
+			// },
+			data: keywords
+		}],
+		image: "data:image/png;base64,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"
+	};
+	var maskImage = new Image();
+	console.log(option.image);
+	maskImage.src = option.image;
 
+	maskImage.onload = function() {
+		myChart.setOption({
+			backgroundColor: '#d3b795',
+			tooltip: {
+				show: false
+			},
+			series: [{
+				type: 'wordCloud',
+				gridSize: 1,
+				sizeRange: [4, 60],
+				rotationRange: [0, 90],
+				maskImage: maskImage,
+				textStyle: {
+					normal: {
+						color: function() {
+							return 'rgb(' +
+								Math.round(Math.random() * 255) +
+								', ' + Math.round(Math.random() * 255) +
+								', ' + Math.round(Math.random() * 255) + ')'
+						}
+					}
+				},
+				left: 'center',
+				top: 'center',
+				// width: '96%',
+				// height: '100%',
+				right: null,
+				bottom: null,
+				// width: 300,
+				// height: 200,
+				// top: 20,
+				data: keywords
+			}]
+		})
+	}
 
-	});
+	myChart.setOption(option);
+	window.onresize = myChart.resize;
 }
