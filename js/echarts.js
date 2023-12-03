@@ -26,7 +26,7 @@ function readFile(files) {
 				num:500,
 			}
 			*/
-			//---------------------------最爱的咖啡饮品------------------------
+			//---------------------------最爱的咖啡饮品(雷达图)------------------------
 			var fD = getMyCol(results, "What is your favorite coffee drink?");
 			var favoriteDrink = getNorepeatKeyWordsDict(fD);
 			/*
@@ -35,10 +35,10 @@ function readFile(files) {
 				num:500,
 			}
 		   */
-			//---------------------------饮用咖啡的原因------------------------
+			//---------------------------饮用咖啡的原因（南丁格尔玫瑰图）------------------------
 			var dR = getMyCol(results, "Why do you drink coffee?");
 			var drinkReason = getNorepeatKeyWordsDict(dR);
-			//---------------------------自评专业等级与口味偏好------------------------
+			//---------------------------自评专业等级与口味偏好（堆叠条形图）------------------------
 			var levelPreference = [];
 			/*
 			每种自评专业等级下，四种偏爱口味分别占多少人。
@@ -59,7 +59,7 @@ function readFile(files) {
 			}
 			processTwoColValueDict(results, "Lastly, how would you rate your own coffee expertise?",
 				"Lastly, what was your favorite overall coffee?", levelPreference);
-			//---------------------------自认为偏好的烘焙度与实际的口味偏好------------------------
+			//---------------------------自认为偏好的烘焙度与实际的口味偏好(旭日图)------------------------
 			var rP = getMyCol(results, "What roast level of coffee do you prefer?");
 			var roastPreference = getNorepeatKeyWordsDict(rP);
 			/*
@@ -74,7 +74,7 @@ function readFile(files) {
 			*/
 			roastPreference = processTwoColValueDict(results, "What roast level of coffee do you prefer?",
 				"Lastly, what was your favorite overall coffee?", roastPreference);
-			//---------------------------自认为偏好的形容词与实际的口味偏好------------------------
+			//---------------------------自认为偏好的形容词与实际的口味偏好（日历图）------------------------
 			var descriptorPreference = getNorepeatKeyWordsDict(getMyCol(results,
 				"Before today's tasting, which of the following best described what kind of coffee you like?"
 			));
@@ -83,7 +83,7 @@ function readFile(files) {
 				"Lastly, what was your favorite overall coffee?",
 				descriptorPreference
 			);
-			//---------------------------四类咖啡的词云------------------------
+			//---------------------------四类咖啡的词云（词云图）------------------------
 			var coffeeA_Notes = getNorepeatKeyWordsDict(getMyCol(results, "Coffee A - Notes"));
 			processNotes(coffeeA_Notes);
 			/*
@@ -100,6 +100,7 @@ function readFile(files) {
 			processNotes(coffeeD_Notes);
 			//---------------------------ECHARTS部分------------------------
 			echarts01(levelPreference);
+			echartsGenderRatio(malePercent, femalePercent);
 		});
 }
 
@@ -214,6 +215,55 @@ function processNotes(notes) //取出现了十次以上的描述
 	}
 }
 
+function echartsGenderRatio(male, female) {
+	var myChart = echarts.init(document.getElementById('pictrue2'));
+	option = {
+		title: {
+			text: 'Gender Ratio',
+			textStyle: {
+				fontSize: 13,
+				color: '#412d24',
+			},
+			bottom: '10%',
+			left: 'center',
+
+		},
+		tooltip: {
+			trigger: 'item'
+		},
+		legend: {
+			orient: 'horizontal',
+			center: 'center',
+		},
+		series: [{
+			name: 'Gender',
+			type: 'pie',
+			color: [
+				'#43476d',
+				'#6d4347',
+			],
+			radius: '40%',
+			data: [{
+					value: male,
+					name: 'Male'
+				},
+				{
+					value: female,
+					name: 'Female'
+				},
+			],
+			emphasis: {
+				itemStyle: {
+					shadowBlur: 10,
+					shadowOffsetX: 0,
+					shadowColor: 'rgba(0, 0, 0, 0.5)'
+				}
+			}
+		}]
+	};
+	myChart.setOption(option);
+}
+
 function echarts01(data) {
 	var myChart = echarts.init(document.getElementById('pictrue1'));
 	// 指定图表的配置项和数据
@@ -224,7 +274,7 @@ function echarts01(data) {
 			textStyle: {
 				fontStyle: 'italic',
 				fontSize: 25,
-				color: '#fff'
+				color: '#412d24',
 			},
 		},
 		tooltip: {
@@ -242,7 +292,7 @@ function echarts01(data) {
 		legend: {
 			right: '5%',
 			textStyle: {
-				color: '#fff'
+				color: '#412d24',
 			}
 		},
 		grid: {
@@ -256,13 +306,13 @@ function echarts01(data) {
 			type: 'category',
 			data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 			axisLabel: {
-				color: "rgba(255, 255, 255, 1)",
+				color: '#412d24',
 				fontFamily: 'Courier New',
 				fontSize: 15
 			},
 			axisLine: {
 				lineStyle: {
-					color: '#fff'
+					color: '#412d24',
 				}
 			},
 			axisTick: {
@@ -345,7 +395,7 @@ function echarts01(data) {
 }
 echarts02();
 function echarts02() {
-	var myChart = echarts.init(document.getElementById('pictrue2'));
+	var myChart = echarts.init(document.getElementById('wordcloud'));
 	var keywords = [{
 		"name": "花鸟市场",
 		"value": 1446
@@ -805,560 +855,38 @@ function echarts02() {
 	{
 		"name": "商旅服务",
 		"value": 2
-	},
-	{
-		"name": "展会服务",
-		"value": 2
-	},
-	{
-		"name": "特许经营",
-		"value": 1
-	},
-	{
-		"name": "休闲爱好",
-		"value": 1169
-	},
-	{
-		"name": "收藏",
-		"value": 412
-	},
-	{
-		"name": "摄影",
-		"value": 393
-	},
-	{
-		"name": "温泉",
-		"value": 230
-	},
-	{
-		"name": "博彩彩票",
-		"value": 211
-	},
-	{
-		"name": "美术",
-		"value": 207
-	},
-	{
-		"name": "书法",
-		"value": 139
-	},
-	{
-		"name": "DIY手工",
-		"value": 75
-	},
-	{
-		"name": "舞蹈",
-		"value": 23
-	},
-	{
-		"name": "钓鱼",
-		"value": 21
-	},
-	{
-		"name": "棋牌桌游",
-		"value": 17
-	},
-	{
-		"name": "KTV",
-		"value": 6
-	},
-	{
-		"name": "密室",
-		"value": 5
-	},
-	{
-		"name": "采摘",
-		"value": 4
-	},
-	{
-		"name": "电玩",
-		"value": 1
-	},
-	{
-		"name": "真人CS",
-		"value": 1
-	},
-	{
-		"name": "轰趴",
-		"value": 1
-	},
-	{
-		"name": "家电数码",
-		"value": 1111
-	},
-	{
-		"name": "手机",
-		"value": 885
-	},
-	{
-		"name": "电脑",
-		"value": 543
-	},
-	{
-		"name": "大家电",
-		"value": 321
-	},
-	{
-		"name": "家电关注品牌",
-		"value": 253
-	},
-	{
-		"name": "网络设备",
-		"value": 162
-	},
-	{
-		"name": "摄影器材",
-		"value": 149
-	},
-	{
-		"name": "影音设备",
-		"value": 133
-	},
-	{
-		"name": "办公数码设备",
-		"value": 113
-	},
-	{
-		"name": "生活电器",
-		"value": 67
-	},
-	{
-		"name": "厨房电器",
-		"value": 54
-	},
-	{
-		"name": "智能设备",
-		"value": 45
-	},
-	{
-		"name": "个人护理电器",
-		"value": 22
-	},
-	{
-		"name": "服饰鞋包",
-		"value": 1047
-	},
-	{
-		"name": "服装",
-		"value": 566
-	},
-	{
-		"name": "饰品",
-		"value": 289
-	},
-	{
-		"name": "鞋",
-		"value": 184
-	},
-	{
-		"name": "箱包",
-		"value": 168
-	},
-	{
-		"name": "奢侈品",
-		"value": 137
-	},
-	{
-		"name": "母婴亲子",
-		"value": 1041
-	},
-	{
-		"name": "孕婴保健",
-		"value": 505
-	},
-	{
-		"name": "母婴社区",
-		"value": 299
-	},
-	{
-		"name": "早教",
-		"value": 103
-	},
-	{
-		"name": "奶粉辅食",
-		"value": 66
-	},
-	{
-		"name": "童车童床",
-		"value": 41
-	},
-	{
-		"name": "关注品牌",
-		"value": 271
-	},
-	{
-		"name": "宝宝玩乐",
-		"value": 30
-	},
-	{
-		"name": "母婴护理服务",
-		"value": 25
-	},
-	{
-		"name": "纸尿裤湿巾",
-		"value": 16
-	},
-	{
-		"name": "妈妈用品",
-		"value": 15
-	},
-	{
-		"name": "宝宝起名",
-		"value": 12
-	},
-	{
-		"name": "童装童鞋",
-		"value": 9
-	},
-	{
-		"name": "胎教",
-		"value": 8
-	},
-	{
-		"name": "宝宝安全",
-		"value": 1
-	},
-	{
-		"name": "宝宝洗护用品",
-		"value": 1
-	},
-	{
-		"name": "软件应用",
-		"value": 1018
-	},
-	{
-		"name": "系统工具",
-		"value": 896
-	},
-	{
-		"name": "理财购物",
-		"value": 440
-	},
-	{
-		"name": "生活实用",
-		"value": 365
-	},
-	{
-		"name": "影音图像",
-		"value": 256
-	},
-	{
-		"name": "社交通讯",
-		"value": 214
-	},
-	{
-		"name": "手机美化",
-		"value": 39
-	},
-	{
-		"name": "办公学习",
-		"value": 28
-	},
-	{
-		"name": "应用市场",
-		"value": 23
-	},
-	{
-		"name": "母婴育儿",
-		"value": 14
-	},
-	{
-		"name": "游戏",
-		"value": 946
-	},
-	{
-		"name": "手机游戏",
-		"value": 565
-	},
-	{
-		"name": "PC游戏",
-		"value": 353
-	},
-	{
-		"name": "网页游戏",
-		"value": 254
-	},
-	{
-		"name": "游戏机",
-		"value": 188
-	},
-	{
-		"name": "模拟辅助",
-		"value": 166
-	},
-	{
-		"name": "个护美容",
-		"value": 942
-	},
-	{
-		"name": "护肤品",
-		"value": 177
-	},
-	{
-		"name": "彩妆",
-		"value": 133
-	},
-	{
-		"name": "美发",
-		"value": 80
-	},
-	{
-		"name": "香水",
-		"value": 50
-	},
-	{
-		"name": "个人护理",
-		"value": 46
-	},
-	{
-		"name": "美甲",
-		"value": 26
-	},
-	{
-		"name": "SPA美体",
-		"value": 21
-	},
-	{
-		"name": "花鸟萌宠",
-		"value": 914
-	},
-	{
-		"name": "绿植花卉",
-		"value": 311
-	},
-	{
-		"name": "狗",
-		"value": 257
-	},
-	{
-		"name": "其他宠物",
-		"value": 131
-	},
-	{
-		"name": "水族",
-		"value": 125
-	},
-	{
-		"name": "猫",
-		"value": 122
-	},
-	{
-		"name": "动物",
-		"value": 81
-	},
-	{
-		"name": "鸟",
-		"value": 67
-	},
-	{
-		"name": "宠物用品",
-		"value": 41
-	},
-	{
-		"name": "宠物服务",
-		"value": 26
-	},
-	{
-		"name": "书籍阅读",
-		"value": 913
-	},
-	{
-		"name": "网络小说",
-		"value": 483
-	},
-	{
-		"name": "关注书籍",
-		"value": 128
-	},
-	{
-		"name": "文学",
-		"value": 105
-	},
-	{
-		"name": "报刊杂志",
-		"value": 77
-	},
-	{
-		"name": "人文社科",
-		"value": 22
-	},
-	{
-		"name": "建材家居",
-		"value": 907
-	},
-	{
-		"name": "装修建材",
-		"value": 644
-	},
-	{
-		"name": "家具",
-		"value": 273
-	},
-	{
-		"name": "家居风格",
-		"value": 187
-	},
-	{
-		"name": "家居家装关注品牌",
-		"value": 140
-	},
-	{
-		"name": "家纺",
-		"value": 107
-	},
-	{
-		"name": "厨具",
-		"value": 47
-	},
-	{
-		"name": "灯具",
-		"value": 43
-	},
-	{
-		"name": "家居饰品",
-		"value": 29
-	},
-	{
-		"name": "家居日常用品",
-		"value": 10
-	},
-	{
-		"name": "生活服务",
-		"value": 883
-	},
-	{
-		"name": "物流配送",
-		"value": 536
-	},
-	{
-		"name": "家政服务",
-		"value": 108
-	},
-	{
-		"name": "摄影服务",
-		"value": 49
-	},
-	{
-		"name": "搬家服务",
-		"value": 38
-	},
-	{
-		"name": "物业维修",
-		"value": 37
-	},
-	{
-		"name": "婚庆服务",
-		"value": 24
-	},
-	{
-		"name": "二手回收",
-		"value": 24
-	},
-	{
-		"name": "鲜花配送",
-		"value": 3
-	},
-	{
-		"name": "维修服务",
-		"value": 3
-	},
-	{
-		"name": "殡葬服务",
-		"value": 1
-	},
-	{
-		"name": "求职创业",
-		"value": 874
-	},
-	{
-		"name": "创业",
-		"value": 363
-	},
-	{
-		"name": "目标职位",
-		"value": 162
-	},
-	{
-		"name": "目标行业",
-		"value": 50
-	},
-	{
-		"name": "兼职",
-		"value": 21
-	},
-	{
-		"name": "期望年薪",
-		"value": 20
-	},
-	{
-		"name": "实习",
-		"value": 16
-	},
-	{
-		"name": "雇主类型",
-		"value": 10
-	},
-	{
-		"name": "星座运势",
-		"value": 789
-	},
-	{
-		"name": "星座",
-		"value": 316
-	},
-	{
-		"name": "算命",
-		"value": 303
-	},
-	{
-		"name": "解梦",
-		"value": 196
-	},
-	{
-		"name": "风水",
-		"value": 93
-	},
-	{
-		"name": "面相分析",
-		"value": 47
-	},
-	{
-		"name": "手相",
-		"value": 32
-	},
-	{
-		"name": "公益",
-		"value": 90
 	}
+	
 	]
 	var option = {
 		series: [{
-			type: 'wordCloud',
-			//maskImage: maskImage,
-			sizeRange: [15, 80],
-			rotationRange: [0, 0],
-			rotationStep: 45,
-			gridSize: 8,
-			shape: 'pentagon',
-			width: '100%',
-			height: '100%',
-			textStyle: {
-				normal: {
-					color: function () {
-						return 'rgb(' + [
-							Math.round(Math.random() * 160),
-							Math.round(Math.random() * 160),
-							Math.round(Math.random() * 160)
-						].join(',') + ')';
-					},
-					fontFamily: 'sans-serif',
-					fontWeight: 'normal'
-				},
-				emphasis: {
-					shadowBlur: 10,
-					shadowColor: '#333'
-				}
-			},
+			// type: 'wordCloud',
+			// //maskImage: maskImage,
+			// sizeRange: [12, 60],
+			// rotationRange: [0, 0],
+			// rotationStep: 45,
+			// gridSize: 3,
+			// drawOutOfBound:false,
+			// shape: 'pentagon',
+			// width: '80%',
+			// height: '75%',
+			// textStyle: {
+			// 	normal: {
+			// 		color: function () {
+			// 			return 'rgb(' + [
+			// 				Math.round(Math.random() * 160),
+			// 				Math.round(Math.random() * 160),
+			// 				Math.round(Math.random() * 160)
+			// 			].join(',') + ')';
+			// 		},
+			// 		fontFamily: 'sans-serif',
+			// 		fontWeight: 'normal'
+			// 	},
+			// 	emphasis: {
+			// 		shadowBlur: 10,
+			// 		shadowColor: '#333'
+			// 	}
+			// },
 			data: keywords
 		}],
 		image: "data:image/png;base64,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"
@@ -1369,15 +897,15 @@ function echarts02() {
 
 	maskImage.onload = function () {
 		myChart.setOption({
-			backgroundColor: '#fff',
+			backgroundColor: '#d3b795',
 			tooltip: {
 				show: false
 			},
 			series: [{
 				type: 'wordCloud',
 				gridSize: 1,
-				sizeRange: [12, 55],
-				rotationRange: [-45, 0, 45, 90],
+				sizeRange: [4, 60],
+				rotationRange: [0,90],
 				maskImage: maskImage,
 				textStyle: {
 					normal: {

@@ -1,17 +1,29 @@
-body{
-	background: #372115;
+body {
+	background: #d3b795;
 }
-#pictrue1{
-	background-color: rgba(135, 207, 235, 0);
-	width: 500px;height:400px;
+
+#pictrue1 {
+	background-color: #d3b795;
+	width: 500px;
+	height: 400px;
 	top: 10%;
 	left: 10px;
 	position: absolute;
 }
-#pictrue2{
-	background-color: rgba(135, 207, 235, 0.829);
-	width: 900px;height:600px;
+
+#pictrue2 {
+	background-color: #d3b795;
+	width: 200px;
+	height: 200px;
 	top: 10%;
 	right: 10px;
+	position: absolute;
+}
+#wordcloud{
+	background-color: #d3b795;
+	width: 700px;
+	height:500px;
+	top: 20%;
+	right: 30%;
 	position: absolute;
 }
