@@ -20,11 +20,11 @@ body {
 	position: absolute;
 }
 #wordcloud{
-	background-color: #d3b795;
+	background-color: #ffffff;
 	width: 300px;
-	height:200px;
-	bottom: 20%;
-	left: 10%;
+	height:300px;
+	bottom: 5%;
+	left: 50%;
 	position: absolute;
 }
 
@@ -46,10 +46,10 @@ body {
 	position: absolute;
 }
 #sunburst{
-	background-color: #ffffff;
-	width: 800px;
-	height:800px;
-	top: 10%;
-	right: 40%;
+	background-color: #d3b795;
+	width: 350px;
+	height:350px;
+	bottom: 0%;
+	left: 0%;
 	position: absolute;
 }

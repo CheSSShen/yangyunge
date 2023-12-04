@@ -85,7 +85,7 @@ function readFile(files) {
 			);
 			//---------------------------四类咖啡的词云（词云图）------------------------
 			var coffeeA_Notes = getNorepeatKeyWordsDict(getMyCol(results, "Coffee A - Notes"));
-			processNotes(coffeeA_Notes);
+			//processNotes(coffeeA_Notes);
 			/*
 			{
 				keyWord:"Fruity",
@@ -104,8 +104,7 @@ function readFile(files) {
 			echartsBrewingMethod(finalHowBrewAtHome);
 			echartsFavoriteDrink(favoriteDrink);
 			echarts03(roastPreference);
-			console.log(roastPreference);
-			//echarts02(coffeeA_Notes);
+			echarts02(coffeeA_Notes);
 		});
 }
 
@@ -368,16 +367,16 @@ function echartsFavoriteDrink(data) {
 		series: [{
 			label: {
 				show: true,
-				position:'inside',
-				fontSize:8,
-				rotate:-20,
+				position: 'inside',
+				fontSize: 8,
+				rotate: -20,
 			},
 			emphasis: {
 				label: {
 					show: true
 				},
-				scale:true,
-				scaleSize :15,
+				scale: true,
+				scaleSize: 15,
 				focus: 'series',
 				blurScope: 'coordinateSystem',
 			},
@@ -400,7 +399,7 @@ function echarts01(data) {
 		title: {
 			show: true,
 			text: "Expertise Level\nWith Preference",
-			left:'10%',
+			left: '10%',
 			textStyle: {
 				fontSize: 13,
 				color: '#412d24',
@@ -419,7 +418,7 @@ function echarts01(data) {
 			}
 		},
 		legend: {
-			right:'0%',
+			right: '0%',
 			textStyle: {
 				color: '#412d24',
 			}
@@ -438,7 +437,7 @@ function echarts01(data) {
 				color: '#412d24',
 				fontFamily: 'Courier New',
 				fontSize: 12,
-				margin:5,
+				margin: 5,
 			},
 			axisLine: {
 				lineStyle: {
@@ -582,7 +581,7 @@ function echarts02(data) {
 			series: [{
 				type: 'wordCloud',
 				gridSize: 1,
-				sizeRange: [4, 60],
+				sizeRange: [5, 20],
 				rotationRange: [0, 90],
 				maskImage: maskImage,
 				textStyle: {
@@ -597,8 +596,8 @@ function echarts02(data) {
 				},
 				left: 'center',
 				top: 'center',
-				// width: '96%',
-				// height: '100%',
+				width: '50%',
+				height: '50%',
 				right: null,
 				bottom: null,
 				// width: 300,
@@ -613,216 +612,213 @@ function echarts02(data) {
 	window.onresize = myChart.resize;
 }
 
-function echarts03(data){
+function echarts03(data) {
 	var myChart = echarts.init(document.getElementById('sunburst'));
-	var option={
+	var option = {
 		tooltip: {
-			trigger : 'item'
-		 },
-		title:{
-			text:"sunburst",
-			textStyle:{
-				fontSize:14,
-				align:'center'
-			}
+			trigger: 'item'
 		},
-		series:{
-			type:"sunburst",
-			data:[
-				{
-					name:"21212",
-					children:[
-						{
-							name:"",
-							value:1
+		title: {
+			text: "Perceived roast preference VS actual preference",
+			bottom: '5%',
+			left: 'center',
+			textStyle: {
+				fontSize: 13,
+				align: 'center',
+				color: '#412d24',
+			},
+		},
+		series: {
+			type: "sunburst",
+			label: {
+				fontSize: 8,
+			},
+			data: [{
+					name: "21212",
+					children: [{
+							name: "",
+							value: 1
 						},
 						{
-							name:"",
-							value:null
+							name: "",
+							value: null
 						},
 						{
-							name:"",
-							value:null
+							name: "",
+							value: null
 						},
 						{
-							name:"",
-							value:null
+							name: "",
+							value: null
 						}
 					]
 
 				},
 				{
-					name:"",
-					children:[
-						{
-							name:"",
-							value:1
+					name: "",
+					children: [{
+							name: "",
+							value: 1
 						},
 						{
-							name:"",
-							value:1
+							name: "",
+							value: 1
 						},
 						{
-							name:"",
-							value:1
+							name: "",
+							value: 1
 						},
 						{
-							name:"",
-							value:1
+							name: "",
+							value: 1
 						}
 					]
 
 				},
 				{
-					name:"",
-					children:[
-						{
-							name:"",
-							value:1
+					name: "",
+					children: [{
+							name: "",
+							value: 1
 						},
 						{
-							name:"",
-							value:1
+							name: "",
+							value: 1
 						},
 						{
-							name:"",
-							value:1
+							name: "",
+							value: 1
 						},
 						{
-							name:"",
-							value:1
+							name: "",
+							value: 1
 						}
 					]
 
 				},
 				{
-					name:"",
-					children:[
-						{
-							name:"",
-							value:1
+					name: "",
+					children: [{
+							name: "",
+							value: 1
 						},
 						{
-							name:"",
-							value:1
+							name: "",
+							value: 1
 						},
 						{
-							name:"",
-							value:1
+							name: "",
+							value: 1
 						},
 						{
-							name:"",
-							value:1
+							name: "",
+							value: 1
 						}
 					]
 
 				},
 				{
-					name:"21212",
-					children:[
-						{
-							name:"",
-							value:1
+					name: "21212",
+					children: [{
+							name: "",
+							value: 1
 						},
 						{
-							name:"",
-							value:1
+							name: "",
+							value: 1
 						},
 						{
-							name:"",
-							value:1
+							name: "",
+							value: 1
 						},
 						{
-							name:"",
-							value:1
+							name: "",
+							value: 1
 						}
 					]
 
 				},
 				{
-					name:"21212",
-					children:[
-						{
-							name:"",
-							value:1
+					name: "21212",
+					children: [{
+							name: "",
+							value: 1
 						},
 						{
-							name:"",
-							value:1
+							name: "",
+							value: 1
 						},
 						{
-							name:"",
-							value:1
+							name: "",
+							value: 1
 						},
 						{
-							name:"",
-							value:1
+							name: "",
+							value: 1
 						}
 					]
 
 				},
 				{
-					name:"21212",
-					children:[
-						{
-							name:"",
-							value:1
+					name: "21212",
+					children: [{
+							name: "",
+							value: 1
 						},
 						{
-							name:"",
-							value:1
+							name: "",
+							value: 1
 						},
 						{
-							name:"",
-							value:1
+							name: "",
+							value: 1
 						},
 						{
-							name:"",
-							value:1
+							name: "",
+							value: 1
 						}
 					]
 
 				}
-			  ],
-			radius:[0,'95%'],
-			sort:undefined,
-			emphasis:{
-				focus:'ancestor'
+			],
+			radius: [0, '95%'],
+			sort: undefined,
+			emphasis: {
+				focus: 'ancestor'
 			},
-			levels:[
-				{},
+			levels: [{},
 				{
-					r0:'15%',
-					r:'45%',
-					itemStyle:{
-						borderWidth:1.5
+					r0: '15%',
+					r: '45%',
+					itemStyle: {
+						borderWidth: 1,
 					},
-					label:{
+					label: {
 						rotate: 'tangential'
 					}
 				},
 				{
-					r0:'45%',
-					r:'70%',
-					label:{
-						align:'center'
+					r0: '45%',
+					r: '70%',
+					label: {
+						align: 'center'
 					}
 				}
 			]
 		}
 	}
-// 线性比例尺 Linear Scales
-// 线性比例尺 Linear Scales 值域中的值 yyy 与定义域中的值 xxx 通过表达式 y=mx+by=mx+by=mx+b 联系起来，
-// 这种映射方式可以在视觉元素的变量中保留数据的原始差异比例
-// 使用方法 d3.scaleLinear(domain, range) 构建一个线性比例尺，
-// 入参是可选的，如果忽略则定义域和值域范围默认是 [0, 1]，也可以在之后通过 continuous.domain(value) 和 continuous.range(value) 设置定义域和值域。
+	// 线性比例尺 Linear Scales
+	// 线性比例尺 Linear Scales 值域中的值 yyy 与定义域中的值 xxx 通过表达式 y=mx+by=mx+by=mx+b 联系起来，
+	// 这种映射方式可以在视觉元素的变量中保留数据的原始差异比例
+	// 使用方法 d3.scaleLinear(domain, range) 构建一个线性比例尺，
+	// 入参是可选的，如果忽略则定义域和值域范围默认是 [0, 1]，也可以在之后通过 continuous.domain(value) 和 continuous.range(value) 设置定义域和值域。
 
 	//对数比例尺
 	const x = d3.scaleLog()
-				.domain([1,910])
-				.range([1,300]);
-	
-	for(var i=0;i<data.length;i++){
+		.domain([1, 910])
+		.range([1, 300]);
+
+	for (var i = 0; i < data.length; i++) {
 		//console.log(data[i].keyWord);
 		option.series.data[i].name = data[i].keyWord;
 		option.series.data[i].children[0].name = "coffeeA";
@@ -833,9 +829,8 @@ function echarts03(data){
 		option.series.data[i].children[2].value = x(data[i].coffeeC);
 		option.series.data[i].children[3].name = "coffeeD";
 		option.series.data[i].children[3].value = x(data[i].coffeeD);
-		console.log(x(data[i].coffeeA)+"-"+x(data[i].coffeeB)+"-"+x(data[i].coffeeC)+"-"+x(data[i].coffeeD));
+		console.log(x(data[i].coffeeA) + "-" + x(data[i].coffeeB) + "-" + x(data[i].coffeeC) + "-" + x(data[i]
+		.coffeeD));
 	}
 	myChart.setOption(option);
 }
-
-
