@@ -212,7 +212,7 @@ function processNotes(notes) //取出现了十次以上的描述
 {
 	for (var i = 0; i < notes.length; i++) {
 		var cur = notes[i];
-		if (cur.num < 3) {
+		if (cur.num < 2) {
 			notes.splice(i, i + 1); //删除索引为i的元素
 			i = i - 1;
 		}
@@ -237,7 +237,7 @@ function echartsGenderRatio(male, female) {
 		title: {
 			text: 'Gender Ratio',
 			textStyle: {
-				fontSize: 13,
+				fontSize: 15,
 				color: '#412d24',
 			},
 			bottom: '10%',
@@ -298,7 +298,7 @@ function echartsBrewingMethod(data) {
 		title: {
 			text: "Preferred brewing method",
 			textStyle: {
-				fontSize: 13,
+				fontSize: 15,
 				color: '#412d24',
 			},
 			bottom: '10%',
@@ -353,10 +353,10 @@ function echartsFavoriteDrink(data) {
 		title: {
 			text: "Favorite Coffee Drink",
 			textStyle: {
-				fontSize: 13,
+				fontSize: 15,
 				color: '#412d24',
 			},
-			bottom: '15%',
+			bottom: '10%',
 			left: 'center',
 		},
 		tooltip: {
@@ -401,7 +401,7 @@ function echarts01(data) {
 			text: "Expertise Level\nWith Preference",
 			left: '10%',
 			textStyle: {
-				fontSize: 13,
+				fontSize: 15,
 				color: '#412d24',
 			},
 		},
@@ -578,10 +578,19 @@ function echarts02(data) {
 			tooltip: {
 				show: false
 			},
+			title: {
+				text: "Coffee A",
+				left: '50%	',
+				bottom:'0%',
+				textStyle: {
+					fontSize: 15,
+					color: '#412d24',
+				},
+			},
 			series: [{
 				type: 'wordCloud',
 				gridSize: 1,
-				sizeRange: [5, 20],
+				sizeRange: [5, 80],
 				rotationRange: [0, 90],
 				maskImage: maskImage,
 				textStyle: {
@@ -596,8 +605,8 @@ function echarts02(data) {
 				},
 				left: 'center',
 				top: 'center',
-				width: '50%',
-				height: '50%',
+				width: '98%',
+				height: '98%',
 				right: null,
 				bottom: null,
 				// width: 300,
@@ -623,7 +632,7 @@ function echarts03(data) {
 			bottom: '5%',
 			left: 'center',
 			textStyle: {
-				fontSize: 13,
+				fontSize: 15,
 				align: 'center',
 				color: '#412d24',
 			},
@@ -830,7 +839,7 @@ function echarts03(data) {
 		option.series.data[i].children[3].name = "coffeeD";
 		option.series.data[i].children[3].value = x(data[i].coffeeD);
 		console.log(x(data[i].coffeeA) + "-" + x(data[i].coffeeB) + "-" + x(data[i].coffeeC) + "-" + x(data[i]
-		.coffeeD));
+			.coffeeD));
 	}
 	myChart.setOption(option);
 }
