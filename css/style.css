@@ -19,12 +19,48 @@ body {
 	left: 3%;
 	position: absolute;
 }
-#wordcloud{
+
+#drinkReason {
+	background-color: #d3b795;
+	width: 300px;
+	height: 300px;
+	top: 60%;
+	right: 3%;
+	position: absolute;
+}
+#wordcloudCoffeeA{
 	background-color: #d3b795;
 	width: 300px;
 	height:280px;
 	top: 8%;
 	left: 5%;
+	position: absolute;
+}
+
+#wordcloudCoffeeB{
+	background-color: #d3b795;
+	width: 300px;
+	height:280px;
+	top: 8%;
+	left: 30%;
+	position: absolute;
+}
+
+#wordcloudCoffeeC{
+	background-color: #d3b795;
+	width: 300px;
+	height:280px;
+	top: 8%;
+	left: 55%;
+	position: absolute;
+}
+
+#wordcloudCoffeeD{
+	background-color: #d3b795;
+	width: 300px;
+	height:280px;
+	top: 8%;
+	left: 80%;
 	position: absolute;
 }
 
