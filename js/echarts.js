@@ -105,10 +105,10 @@ function readFile(files) {
 			echartsBrewingMethod(finalHowBrewAtHome);
 			echartsFavoriteDrink(favoriteDrink);
 			echarts03(roastPreference);
-			echarts02(coffeeA_Notes, 'wordcloudCoffeeA');
-			echarts02(coffeeB_Notes, 'wordcloudCoffeeB');
-			echarts02(coffeeC_Notes, 'wordcloudCoffeeC');
-			echarts02(coffeeD_Notes, 'wordcloudCoffeeD');
+			echarts02(coffeeA_Notes, 'wordcloudCoffeeA','Light roast, washed process');
+			echarts02(coffeeB_Notes, 'wordcloudCoffeeB','Medium roast');
+			echarts02(coffeeC_Notes, 'wordcloudCoffeeC','Dark roast');
+			echarts02(coffeeD_Notes, 'wordcloudCoffeeD','Light roast, natural process');
 		});
 }
 
@@ -245,7 +245,7 @@ function echartsGenderRatio(male, female) {
 		title: {
 			text: 'Gender Ratio',
 			textStyle: {
-				fontSize: 15,
+				fontSize: 20,
 				color: '#412d24',
 			},
 			bottom: '5%',
@@ -256,6 +256,10 @@ function echartsGenderRatio(male, female) {
 			show: true,
 			trigger: 'item',
 			formatter: '{b} : {d}%',
+			textStyle: {
+				fontSize: 20,
+				color: '#412d24',
+			},
 		},
 		legend: {
 			orient: 'horizontal',
@@ -306,15 +310,18 @@ function echartsDrinkReason(data) {
 			text: 'Why Drinking Coffee',
 			left: 'center',
 			bottom: '5%',
-			fontSize: 15,
 			textStyle: {
-				fontSize: 15,
+				fontSize: 20,
 				color: '#412d24',
 			},
 		},
 		tooltip: {
 			trigger: 'item',
 			formatter: '{b} : {d}%',
+			textStyle: {
+				fontSize: 20,
+				color: '#412d24',
+			},
 		},
 		series: [{
 			type: 'pie',
@@ -360,7 +367,7 @@ function echartsBrewingMethod(data) {
 		title: {
 			text: "Preferred brewing method",
 			textStyle: {
-				fontSize: 15,
+				fontSize: 20,
 				color: '#412d24',
 			},
 			bottom: '5%',
@@ -370,6 +377,11 @@ function echartsBrewingMethod(data) {
 			show: true,
 			trigger: 'axis',
 			formatter: '{b} : {c}',
+			textStyle: {
+				fontSize: 20,
+				color: '#412d24',
+			},
+
 		},
 		xAxis: {
 			show: true,
@@ -391,6 +403,7 @@ function echartsBrewingMethod(data) {
 			label: {
 				show: true,
 				position: 'insideTop',
+				fontSize: 20,
 			},
 			data: mySeriesData,
 			type: 'bar',
@@ -413,11 +426,11 @@ function echartsFavoriteDrink(data) {
 	}
 
 	option = {
-		color:['#465da3','#73a35d','#bfa549','#c55959','#609fb8','#2c7855','#d1764b','#9a606c','#bc64a4'],
+		color: ['#465da3', '#73a35d', '#bfa549', '#c55959', '#609fb8', '#2c7855', '#d1764b', '#9a606c', '#bc64a4'],
 		title: {
 			text: "Favorite Coffee Drink",
 			textStyle: {
-				fontSize: 15,
+				fontSize: 20,
 				color: '#412d24',
 			},
 			bottom: '5%',
@@ -427,12 +440,16 @@ function echartsFavoriteDrink(data) {
 			show: true,
 			trigger: 'item',
 			formatter: '{b} : {d}%',
+			textStyle: {
+				fontSize: 20,
+				color: '#412d24',
+			},
 		},
 		series: [{
 			label: {
 				show: true,
 				position: 'inside',
-				fontSize: 10,
+				fontSize: 13,
 				rotate: -20,
 			},
 			emphasis: {
@@ -460,7 +477,7 @@ function echarts01(data) {
 	var myChart = echarts.init(document.getElementById('expertise'));
 	// 指定图表的配置项和数据
 	var option = {
-		color:['#465da3','#73a35d','#bfa549','#c55959','#609fb8','#2c7855','#d1764b','#9a606c','#bc64a4'],
+		color: ['#465da3', '#73a35d', '#bfa549', '#c55959', '#609fb8', '#2c7855', '#d1764b', '#9a606c', '#bc64a4'],
 		title: {
 			show: true,
 			text: "Expertise Level\nWith Preference",
@@ -480,7 +497,11 @@ function echarts01(data) {
 						return "Coffee Expertise Level:" + params.value;
 					},
 				}
-			}
+			},
+			textStyle: {
+				fontSize: 20,
+				color: '#412d24',
+			},
 		},
 		legend: {
 			right: '0%',
@@ -590,7 +611,7 @@ function echarts01(data) {
 	myChart.setOption(option);
 }
 
-function echarts02(data, divID) {
+function echarts02(data, divID,intro) {
 	var myChart = echarts.init(document.getElementById(divID));
 	var keywords = [];
 	for (var i = 0; i < data.length; i++) {
@@ -615,11 +636,16 @@ function echarts02(data, divID) {
 			backgroundColor: '#d3b795',
 			tooltip: {
 				show: true,
+				textStyle: {
+					fontSize: 20,
+					color: '#412d24',
+				},
 			},
 			title: {
-				text: divID.slice(9, 15) + ' ' + divID.slice(15, 16),
-				left: '23%	',
+				text: divID.slice(9, 15) + ' ' + divID.slice(15, 16)+' : '+intro,
+				left: '43%	',
 				bottom: '0%',
+				textAlign:'center',
 				textStyle: {
 					fontSize: 18,
 					color: '#412d24',
@@ -631,7 +657,7 @@ function echarts02(data, divID) {
 				sizeRange: [10, 80],
 				rotationRange: [0, 90],
 				maskImage: maskImage,
-				drawOutOfBound:false,
+				drawOutOfBound: false,
 				textStyle: {
 					color: function() {
 						return 'rgb(' +
@@ -656,9 +682,13 @@ function echarts02(data, divID) {
 function echarts03(data) {
 	var myChart = echarts.init(document.getElementById('sunburst'));
 	var option = {
-		color:['#465da3','#73a35d','#bfa549','#c55959','#609fb8','#2c7855','#d1764b','#9a606c','#bc64a4'],
+		color: ['#465da3', '#73a35d', '#bfa549', '#c55959', '#609fb8', '#2c7855', '#d1764b', '#9a606c', '#bc64a4'],
 		tooltip: {
-			trigger: 'item'
+			trigger: 'item',
+			textStyle: {
+				fontSize: 20,
+				color: '#412d24',
+			},
 		},
 		title: {
 			text: "Perceived roast preference VS actual preference",

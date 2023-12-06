@@ -1,6 +1,23 @@
 body {
 	background: #d3b795;
 }
+h1{
+	color: #412d24;
+}
+h2{
+	color: #412d24;
+}
+p{
+	color: #412d24;
+}
+#title{
+	background-color: rgb(11, 124, 236,150);
+	width: 800px;
+	height: 100px;
+	top: -30px;
+	left: 150px;
+	position: absolute;
+}
 #genderRatio {
 	background-color: #1a1817;
 	width: 400px;
@@ -30,7 +47,7 @@ body {
 	background-color: #c495d3;
 	width: 400px;
 	height:400px;
-	top: 1360px;
+	top: 960px;
 	left: 144px;
 	position: absolute;
 }
@@ -39,7 +56,7 @@ body {
 	background-color: #915f23;
 	width: 400px;
 	height:400px;
-	top: 1360px;
+	top: 960px;
 	left: 588px;
 	position: absolute;
 }
@@ -48,7 +65,7 @@ body {
 	background-color: #d3b795;
 	width: 400px;
 	height:400px;
-	top: 1360px;
+	top: 960px;
 	left: 1032px;
 	position: absolute;
 }
@@ -57,7 +74,7 @@ body {
 	background-color: #d3b795;
 	width: 400px;
 	height:400px;
-	top: 1360px;
+	top: 960px;
 	left: 1476px;
 	position: absolute;
 }
@@ -92,11 +109,21 @@ body {
 	background-color: #95d3bf;
 	width: 600px;
 	height: 400px;
-	top: 960px;
+	top: 1380px;
 	left:660px;
 	position: absolute;
 }
+#introduction{
+	background-color: rgba(219, 192, 36, 0.541);
+	width: 900px;
+	height: 400px;
+	top: 450px;
+	left:800px;
+	position: absolute;
+	
+}
+
 #all{
-	top:100px;
+	top:200px;
 	position: absolute;
 }
