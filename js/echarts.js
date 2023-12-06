@@ -248,7 +248,7 @@ function echartsGenderRatio(male, female) {
 				fontSize: 15,
 				color: '#412d24',
 			},
-			bottom: '10%',
+			bottom: '5%',
 			left: 'center',
 
 		},
@@ -268,7 +268,7 @@ function echartsGenderRatio(male, female) {
 				'#465da3',
 				'#c55959',
 			],
-			radius: '40%',
+			radius: '70%',
 			data: [{
 					value: male,
 					name: 'Male'
@@ -305,7 +305,7 @@ function echartsDrinkReason(data) {
 		title: {
 			text: 'Why Drinking Coffee',
 			left: 'center',
-			bottom: '10%',
+			bottom: '5%',
 			fontSize: 15,
 			textStyle: {
 				fontSize: 15,
@@ -318,7 +318,7 @@ function echartsDrinkReason(data) {
 		},
 		series: [{
 			type: 'pie',
-			radius: ['20%', '60%'],
+			radius: ['30%', '70%'],
 			avoidLabelOverlap: false,
 			itemStyle: {
 				borderRadius: 10,
@@ -363,7 +363,7 @@ function echartsBrewingMethod(data) {
 				fontSize: 15,
 				color: '#412d24',
 			},
-			bottom: '10%',
+			bottom: '5%',
 			left: 'center',
 		},
 		tooltip: {
@@ -420,7 +420,7 @@ function echartsFavoriteDrink(data) {
 				fontSize: 15,
 				color: '#412d24',
 			},
-			bottom: '10%',
+			bottom: '5%',
 			left: 'center',
 		},
 		tooltip: {
@@ -432,7 +432,7 @@ function echartsFavoriteDrink(data) {
 			label: {
 				show: true,
 				position: 'inside',
-				fontSize: 8,
+				fontSize: 10,
 				rotate: -20,
 			},
 			emphasis: {
@@ -440,12 +440,12 @@ function echartsFavoriteDrink(data) {
 					show: true
 				},
 				scale: true,
-				scaleSize: 15,
+				scaleSize: 20,
 				focus: 'series',
 				blurScope: 'coordinateSystem',
 			},
 			type: 'pie',
-			radius: [30, 130],
+			radius: [30, 200],
 			roseType: 'area',
 			itemStyle: {
 				borderRadius: 5,
@@ -628,7 +628,7 @@ function echarts02(data, divID) {
 			series: [{
 				type: 'wordCloud',
 				gridSize: 1,
-				sizeRange: [7, 80],
+				sizeRange: [10, 80],
 				rotationRange: [0, 90],
 				maskImage: maskImage,
 				drawOutOfBound:false,
@@ -665,7 +665,7 @@ function echarts03(data) {
 			bottom: '5%',
 			left: 'center',
 			textStyle: {
-				fontSize: 15,
+				fontSize: 25,
 				align: 'center',
 				color: '#412d24',
 			},
@@ -673,7 +673,7 @@ function echarts03(data) {
 		series: {
 			type: "sunburst",
 			label: {
-				fontSize: 8,
+				fontSize: 15,
 			},
 			data: [{
 					name: "21212",

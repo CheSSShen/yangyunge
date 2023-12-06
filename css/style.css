@@ -1,99 +1,102 @@
 body {
 	background: #d3b795;
 }
-
-#expertise {
-	background-color: #d3b795;
+#genderRatio {
+	background-color: #1a1817;
 	width: 400px;
 	height: 400px;
-	top: 730px;
-	left: 5%;
-	position: absolute;
-}
-
-#genderRatio {
-	background-color: #d3b795;
-	width: 300px;
-	height: 300px;
-	top: 60%;
-	left: 3%;
-	position: absolute;
+	top: 0px;
+	left: 180px;
+	position: relative;
 }
 
 #drinkReason {
-	background-color: #d3b795;
-	width: 300px;
-	height: 300px;
-	top: 60%;
-	right: 3%;
-	position: absolute;
+	background-color: #f11313;
+	width: 400px;
+	height: 400px;
+	top: -400px;
+	left:760px;
+	position: relative;
+}
+#favoriteDrink {
+	background-color: rgb(11, 124, 236);
+	width: 400px;
+	height: 400px;
+	top: -800px;
+	left: 1340px;
+	position: relative;
 }
 #wordcloudCoffeeA{
-	background-color: #d3b795;
-	width: 300px;
-	height:280px;
-	top: 8%;
-	left: 5%;
+	background-color: #c495d3;
+	width: 400px;
+	height:400px;
+	top: 1360px;
+	left: 144px;
 	position: absolute;
 }
 
 #wordcloudCoffeeB{
-	background-color: #d3b795;
-	width: 300px;
-	height:280px;
-	top: 8%;
-	left: 30%;
+	background-color: #915f23;
+	width: 400px;
+	height:400px;
+	top: 1360px;
+	left: 588px;
 	position: absolute;
 }
 
 #wordcloudCoffeeC{
 	background-color: #d3b795;
-	width: 300px;
-	height:280px;
-	top: 8%;
-	left: 55%;
+	width: 400px;
+	height:400px;
+	top: 1360px;
+	left: 1032px;
 	position: absolute;
 }
 
 #wordcloudCoffeeD{
 	background-color: #d3b795;
-	width: 300px;
-	height:280px;
-	top: 8%;
-	left: 80%;
+	width: 400px;
+	height:400px;
+	top: 1360px;
+	left: 1476px;
 	position: absolute;
 }
 
 #brewMethod {
-	background-color: #d3b795;
-	width: 300px;
-	height: 300px;
-	top: 60%;
-	left:30%;
+	background-color: rgba(219, 192, 36, 0.541);
+	width: 1720px;
+	height: 600px;
+	top: 350px;
+	left:100px;
 	position: absolute;
 }
 
-#favoriteDrink {
-	background-color: #d3b795;
-	width: 300px;
-	height: 300px;
-	top: 60%;
-	left:52%;
-	position: absolute;
-}
+
 #sunburst{
-	background-color: #d3b795;
-	width: 400px;
-	height:400px;
-	top:730px;
-	left: 35%;
+	background-color: #acd39527;
+	width: 760px;
+	height:760px;
+	top:1660px;
+	left: 150px;
 	position: absolute;
 }
 #describe{
-	background-color: #d3b795;
-	width: 400px;
-	height:400px;
-	top:730px;
-	right:8%;
+	background-color: #86541731;
+	width: 760px;
+	height:760px;
+	top:1660px;
+	left:1010px;
+	position: absolute;
+}
+#expertise {
+	background-color: #95d3bf;
+	width: 600px;
+	height: 400px;
+	top: 960px;
+	left:660px;
+	position: absolute;
+}
+#all{
+	top:100px;
 	position: absolute;
 }

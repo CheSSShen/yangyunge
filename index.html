@@ -4,7 +4,6 @@
 		<meta charset="utf-8">
 		<title>ECharts</title>
 		<!-- 引入 echarts.js -->
-		<!-- <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script> -->
 		<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 		<!-- 引入jquery方法 -->
 		<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -24,7 +23,7 @@
 	<body>
 		<input type="file" onchange="readFile(this.files)" />
 		<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-		<div style="height: 1500px;">
+		<div id="all" style="height: 1500px;">
 			<div id="expertise"></div>
 			<div id="genderRatio"></div>
 			<div id="drinkReason"></div>
