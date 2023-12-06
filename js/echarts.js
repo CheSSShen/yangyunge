@@ -576,7 +576,7 @@ function echarts02(data) {
 		myChart.setOption({
 			backgroundColor: '#d3b795',
 			tooltip: {
-				show: false
+				show: true
 			},
 			series: [{
 				type: 'wordCloud',
@@ -584,6 +584,7 @@ function echarts02(data) {
 				sizeRange: [5, 20],
 				rotationRange: [0, 90],
 				maskImage: maskImage,
+				drawOutOfBound:false,
 				textStyle: {
 					normal: {
 						color: function() {
@@ -607,7 +608,6 @@ function echarts02(data) {
 			}]
 		})
 	}
-
 	myChart.setOption(option);
 	window.onresize = myChart.resize;
 }
