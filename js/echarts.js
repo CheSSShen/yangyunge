@@ -85,7 +85,7 @@ function readFile(files) {
 			);
 			//---------------------------四类咖啡的词云（词云图）------------------------
 			var coffeeA_Notes = getNorepeatKeyWordsDict(getMyCol(results, "Coffee A - Notes"));
-			//processNotes(coffeeA_Notes);
+			processNotes(coffeeA_Notes);
 			/*
 			{
 				keyWord:"Fruity",
@@ -101,10 +101,14 @@ function readFile(files) {
 			//---------------------------ECHARTS部分------------------------
 			echarts01(levelPreference);
 			echartsGenderRatio(malePercent, femalePercent);
+			echartsDrinkReason(drinkReason);
 			echartsBrewingMethod(finalHowBrewAtHome);
 			echartsFavoriteDrink(favoriteDrink);
 			echarts03(roastPreference);
-			echarts02(coffeeA_Notes);
+			echarts02(coffeeA_Notes, 'wordcloudCoffeeA');
+			echarts02(coffeeB_Notes, 'wordcloudCoffeeB');
+			echarts02(coffeeC_Notes, 'wordcloudCoffeeC');
+			echarts02(coffeeD_Notes, 'wordcloudCoffeeD');
 		});
 }
 
@@ -208,13 +212,16 @@ function processTwoColValueDict(results, col1, col2, dic) {
 	return dict;
 }
 
-function processNotes(notes) //取出现了十次以上的描述
-{
+function processNotes(notes) { //防止一单词不同拼写重复
 	for (var i = 0; i < notes.length; i++) {
-		var cur = notes[i];
-		if (cur.num < 3) {
-			notes.splice(i, i + 1); //删除索引为i的元素
-			i = i - 1;
+		var cur = notes[i].keyWord;
+		for (var j = i + 1; j < notes.length; j++) {
+			if (notes[j].keyWord.toLowerCase() == cur.toLowerCase()) {
+				var n = notes[j].num;
+				notes.splice(j, j + 1);
+				notes[i].num += n;
+				j--;
+			}
 		}
 	}
 }
@@ -234,10 +241,11 @@ function sortArr(myData) {
 function echartsGenderRatio(male, female) {
 	var myChart = echarts.init(document.getElementById('genderRatio'));
 	option = {
+
 		title: {
 			text: 'Gender Ratio',
 			textStyle: {
-				fontSize: 13,
+				fontSize: 15,
 				color: '#412d24',
 			},
 			bottom: '10%',
@@ -257,8 +265,8 @@ function echartsGenderRatio(male, female) {
 			name: 'Gender',
 			type: 'pie',
 			color: [
-				'#5470c6',
-				'#ee6666',
+				'#465da3',
+				'#c55959',
 			],
 			radius: '40%',
 			data: [{
@@ -282,6 +290,59 @@ function echartsGenderRatio(male, female) {
 	myChart.setOption(option);
 }
 
+function echartsDrinkReason(data) {
+	var myChart = echarts.init(document.getElementById('drinkReason'));
+	var myData = [];
+	for (var i = 0; i < data.length; i++) {
+		var cur = {
+			value: data[i].num,
+			name: data[i].keyWord,
+		}
+		myData.push(cur);
+	}
+	option = {
+		color: ['#465da3', '#73a35d', '#bfa549', '#c55959', '#609fb8', '#2c7855', '#d1764b', '#9a606c', '#bc64a4'],
+		title: {
+			text: 'Why Drinking Coffee',
+			left: 'center',
+			bottom: '10%',
+			fontSize: 15,
+			textStyle: {
+				fontSize: 15,
+				color: '#412d24',
+			},
+		},
+		tooltip: {
+			trigger: 'item',
+			formatter: '{b} : {d}%',
+		},
+		series: [{
+			type: 'pie',
+			radius: ['20%', '60%'],
+			avoidLabelOverlap: false,
+			itemStyle: {
+				borderRadius: 10,
+			},
+			label: {
+				show: false,
+				position: 'center'
+			},
+			emphasis: {
+				label: {
+					show: true,
+					fontSize: 18,
+					fontWeight: 'bold'
+				}
+			},
+			labelLine: {
+				show: false
+			},
+			data: myData,
+		}]
+	};
+	myChart.setOption(option);
+}
+
 function echartsBrewingMethod(data) {
 	var myChart = echarts.init(document.getElementById('brewMethod'));
 	sortArr(data);
@@ -295,10 +356,11 @@ function echartsBrewingMethod(data) {
 
 
 	option = {
+		color: ['#465da3', '#73a35d', '#bfa549', '#c55959', '#609fb8', '#2c7855', '#d1764b', '#9a606c', '#bc64a4'],
 		title: {
 			text: "Preferred brewing method",
 			textStyle: {
-				fontSize: 13,
+				fontSize: 15,
 				color: '#412d24',
 			},
 			bottom: '10%',
@@ -307,6 +369,7 @@ function echartsBrewingMethod(data) {
 		tooltip: {
 			show: true,
 			trigger: 'axis',
+			formatter: '{b} : {c}',
 		},
 		xAxis: {
 			show: true,
@@ -350,13 +413,14 @@ function echartsFavoriteDrink(data) {
 	}
 
 	option = {
+		color:['#465da3','#73a35d','#bfa549','#c55959','#609fb8','#2c7855','#d1764b','#9a606c','#bc64a4'],
 		title: {
 			text: "Favorite Coffee Drink",
 			textStyle: {
-				fontSize: 13,
+				fontSize: 15,
 				color: '#412d24',
 			},
-			bottom: '15%',
+			bottom: '10%',
 			left: 'center',
 		},
 		tooltip: {
@@ -396,12 +460,13 @@ function echarts01(data) {
 	var myChart = echarts.init(document.getElementById('expertise'));
 	// 指定图表的配置项和数据
 	var option = {
+		color:['#465da3','#73a35d','#bfa549','#c55959','#609fb8','#2c7855','#d1764b','#9a606c','#bc64a4'],
 		title: {
 			show: true,
 			text: "Expertise Level\nWith Preference",
 			left: '10%',
 			textStyle: {
-				fontSize: 13,
+				fontSize: 15,
 				color: '#412d24',
 			},
 		},
@@ -485,7 +550,7 @@ function echarts01(data) {
 				stack: 'total',
 				label: {
 					show: true,
-					formatter: '{a}'
+					formatter: '{a}',
 				},
 				emphasis: {
 					focus: 'series'
@@ -525,8 +590,8 @@ function echarts01(data) {
 	myChart.setOption(option);
 }
 
-function echarts02(data) {
-	var myChart = echarts.init(document.getElementById('wordcloud'));
+function echarts02(data, divID) {
+	var myChart = echarts.init(document.getElementById(divID));
 	var keywords = [];
 	for (var i = 0; i < data.length; i++) {
 		var cur = {
@@ -537,33 +602,6 @@ function echarts02(data) {
 	}
 	var option = {
 		series: [{
-			// type: 'wordCloud',
-			// //maskImage: maskImage,
-			// sizeRange: [12, 60],
-			// rotationRange: [0, 0],
-			// rotationStep: 45,
-			// gridSize: 3,
-			// drawOutOfBound:false,
-			// shape: 'pentagon',
-			// width: '80%',
-			// height: '75%',
-			// textStyle: {
-			// 	normal: {
-			// 		color: function () {
-			// 			return 'rgb(' + [
-			// 				Math.round(Math.random() * 160),
-			// 				Math.round(Math.random() * 160),
-			// 				Math.round(Math.random() * 160)
-			// 			].join(',') + ')';
-			// 		},
-			// 		fontFamily: 'sans-serif',
-			// 		fontWeight: 'normal'
-			// 	},
-			// 	emphasis: {
-			// 		shadowBlur: 10,
-			// 		shadowColor: '#333'
-			// 	}
-			// },
 			data: keywords
 		}],
 		image: "data:image/png;base64,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"
@@ -576,34 +614,37 @@ function echarts02(data) {
 		myChart.setOption({
 			backgroundColor: '#d3b795',
 			tooltip: {
-				show: true
+				show: true,
+			},
+			title: {
+				text: divID.slice(9, 15) + ' ' + divID.slice(15, 16),
+				left: '23%	',
+				bottom: '0%',
+				textStyle: {
+					fontSize: 18,
+					color: '#412d24',
+				},
 			},
 			series: [{
 				type: 'wordCloud',
 				gridSize: 1,
-				sizeRange: [5, 20],
+				sizeRange: [7, 80],
 				rotationRange: [0, 90],
 				maskImage: maskImage,
 				drawOutOfBound:false,
 				textStyle: {
-					normal: {
-						color: function() {
-							return 'rgb(' +
-								Math.round(Math.random() * 255) +
-								', ' + Math.round(Math.random() * 255) +
-								', ' + Math.round(Math.random() * 255) + ')'
-						}
-					}
+					color: function() {
+						return 'rgb(' +
+							Math.round(Math.random() * 155) +
+							', ' + Math.round(Math.random() * 155) +
+							', ' + Math.round(Math.random() * 155) + ')'
+					},
 				},
 				left: 'center',
-				top: 'center',
-				width: '50%',
-				height: '50%',
+				width: '100%',
+				height: '100%',
 				right: null,
 				bottom: null,
-				// width: 300,
-				// height: 200,
-				// top: 20,
 				data: keywords
 			}]
 		})
@@ -615,6 +656,7 @@ function echarts02(data) {
 function echarts03(data) {
 	var myChart = echarts.init(document.getElementById('sunburst'));
 	var option = {
+		color:['#465da3','#73a35d','#bfa549','#c55959','#609fb8','#2c7855','#d1764b','#9a606c','#bc64a4'],
 		tooltip: {
 			trigger: 'item'
 		},
@@ -623,7 +665,7 @@ function echarts03(data) {
 			bottom: '5%',
 			left: 'center',
 			textStyle: {
-				fontSize: 13,
+				fontSize: 15,
 				align: 'center',
 				color: '#412d24',
 			},
@@ -830,7 +872,7 @@ function echarts03(data) {
 		option.series.data[i].children[3].name = "coffeeD";
 		option.series.data[i].children[3].value = x(data[i].coffeeD);
 		console.log(x(data[i].coffeeA) + "-" + x(data[i].coffeeB) + "-" + x(data[i].coffeeC) + "-" + x(data[i]
-		.coffeeD));
+			.coffeeD));
 	}
 	myChart.setOption(option);
 }
