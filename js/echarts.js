@@ -402,7 +402,7 @@ function echartsBrewingMethod(data) {
 		series: [{
 			label: {
 				show: true,
-				position: 'insideTop',
+				position: 'top',
 				fontSize: 20,
 			},
 			data: mySeriesData,
@@ -480,10 +480,11 @@ function echarts01(data) {
 		color: ['#465da3', '#73a35d', '#bfa549', '#c55959', '#609fb8', '#2c7855', '#d1764b', '#9a606c', '#bc64a4'],
 		title: {
 			show: true,
-			text: "Expertise Level\nWith Preference",
-			left: '10%',
+			text: "Expertise Level With Preference",
+			top:'5%',
+			left: '5%',
 			textStyle: {
-				fontSize: 15,
+				fontSize: 20,
 				color: '#412d24',
 			},
 		},
