@@ -23,6 +23,24 @@
 	<body>
 		<input type="file" onchange="readFile(this.files)" />
 		<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+		<div id="title">
+			<h1 style="font-size: 10ex;text-align: left;color:#6d6943;font-style:italic;">
+				COFFEE TASTE
+			</h1>
+		</div>
+		<div id="background">
+			<img id='bg' src='imgs/bg.png' alt="background" width="200" height="200">
+		</div>
+		<div id="icons">
+			<img id='pourOver' src="imgs/pour over.png" alt="pour over" width="50" height="50">
+			<img id='espresso' src="imgs/espresso.png" alt="espresso" width="50" height="50">
+			<img id='frenchPress' src="imgs/frenchPress.png" alt="frenchPress" width="50" height="50">
+			<img id='moka' src="imgs/moka.png" alt="moka" width="50" height="50">
+			<img id='capusle' src="imgs/capusle.png" alt="capusle" width="50" height="50">
+			<img id='bean-to-cup' src="imgs/bean.png" alt="bean" width="50" height="50">
+			<img id='instant' src="imgs/instant.png" alt="instant" width="50" height="50">
+			<img id='bottle' src="imgs/bottle.png" alt="bottle" width="50" height="50">
+		</div>
 		<div id="all" style="height: 1500px;">
 			<div id="expertise"></div>
 			<div id="genderRatio"></div>
@@ -35,6 +53,28 @@
 			<div id="favoriteDrink"></div>
 			<div id="sunburst"></div>
 			<div id="describe"></div>
+			<div id="introduction">
+				<h1>American Coffee Taste Test</h1>
+				<h2>James Hoffmann and Cometeer survey America's coffee taste preferences</h2>
+				<p>World champion barista James Hoffmann and Cometeer partnered to conduct a first-of-its-kind coffee taste test.
+				 Cometeer shipped 5000 coffee kits across America. 
+				 Kits contained four different coffees - pre-extracted and flash frozen. 
+				 Tasters melted and diluted the coffee capsules for a largely identical tasting experience. 
+				 Tasting and ratings were conducted blind. 
+				 After survey responses were collected (provided data), some attributes of the coffee were revealed.</p>
+			</div>
+			<div id='abstract1'>
+				<p style="font-size: 2.5ex;text-align:left;color:#6d6943;">
+				&emsp;The main survey of the participants' preference for these four kinds of coffee. <br>
+				&emsp;The test participants need to answer three multiple choice questions after tasting, to choose the taste preference.
+				</p>
+			</div>
+			<div id='abstract2'>
+				<p style="font-size: 2.5ex;text-align:left;color:#6d6943;">
+				&emsp;Then was a survey of participants' information,
+				 including age, gender, frequency of coffee consumption, self-rated coffee expertise level,income and dozens of other questions.
+				</p>
+			</div>
 		</div>
 
 		<script type="text/javascript" src="js/echarts.js"></script>

@@ -1,8 +1,97 @@
 body {
 	background: #d3b795;
 }
+h1{
+	color: #6d6943;
+}
+h2{
+	color: #6d6943
+}
+p{
+	color: #6d6943
+}
+#icons{
+	width: 1500px;
+	height: 50px;
+	top: 1060px;
+	left: 150px;
+	position: relative;
+}
+#pourOver{
+	width: 50px;
+	height: 50px;
+	top: 0px;
+	left: 170px;
+	position: relative;
+}
+#espresso{
+	width: 50px;
+	height: 50px;
+	top: 0px;
+	left: 250px;
+	position: relative;
+}
+#frenchPress{
+	width: 50px;
+	height: 50px;
+	top: 0px;
+	left: 330px;
+	position: relative;
+}
+#moka{
+	width: 50px;
+	height: 50px;
+	top: 0px;
+	left: 420px;
+	position: relative;
+}
+#capusle{
+	width: 50px;
+	height: 50px;
+	top: 0px;
+	left: 775px;
+	position: relative;
+}
+#instant{
+	width: 50px;
+	height: 50px;
+	top: 0px;
+	left: 940px;
+	position: relative;
+}
+#bottle{
+	width: 50px;
+	height: 50px;
+	top: 0px;
+	left: 750px;
+	position: relative;
+}
+#bean-to-cup{
+	width: 50px;
+	height: 50px;
+	top: 0px;
+	left: 1130px;
+	position: relative;
+}
+
+#title{
+	/* background-color: rgb(11, 124, 236,150); */
+	width: 800px;
+	height: 100px;
+	top: -30px;
+	left: 150px;
+	position:absolute;
+}
+#bg{
+	opacity: 0.25;
+	width: 600px;
+	height: 600px;
+	top: 30px;
+	left: 1000px;
+	position:absolute;
+}
 #genderRatio {
-	background-color: #1a1817;
+	/* background-color: #1a1817; */
 	width: 400px;
 	height: 400px;
 	top: 0px;
@@ -11,7 +100,7 @@ body {
 }
 
 #drinkReason {
-	background-color: #f11313;
+	/* background-color: #f11313; */
 	width: 400px;
 	height: 400px;
 	top: -400px;
@@ -19,7 +108,7 @@ body {
 	position: relative;
 }
 #favoriteDrink {
-	background-color: rgb(11, 124, 236);
+	/* background-color: rgb(11, 124, 236); */
 	width: 400px;
 	height: 400px;
 	top: -800px;
@@ -30,7 +119,7 @@ body {
 	background-color: #c495d3;
 	width: 400px;
 	height:400px;
-	top: 1360px;
+	top: 960px;
 	left: 144px;
 	position: absolute;
 }
@@ -39,7 +128,7 @@ body {
 	background-color: #915f23;
 	width: 400px;
 	height:400px;
-	top: 1360px;
+	top: 960px;
 	left: 588px;
 	position: absolute;
 }
@@ -48,7 +137,7 @@ body {
 	background-color: #d3b795;
 	width: 400px;
 	height:400px;
-	top: 1360px;
+	top: 960px;
 	left: 1032px;
 	position: absolute;
 }
@@ -57,13 +146,13 @@ body {
 	background-color: #d3b795;
 	width: 400px;
 	height:400px;
-	top: 1360px;
+	top: 960px;
 	left: 1476px;
 	position: absolute;
 }
 
 #brewMethod {
-	background-color: rgba(219, 192, 36, 0.541);
+	/* background-color: rgba(219, 192, 36, 0.541); */
 	width: 1720px;
 	height: 600px;
 	top: 350px;
@@ -89,14 +178,39 @@ body {
 	position: absolute;
 }
 #expertise {
-	background-color: #95d3bf;
+	/* background-color: #95d3bf; */
 	width: 600px;
 	height: 400px;
-	top: 960px;
+	top: 1380px;
 	left:660px;
 	position: absolute;
 }
+#introduction{
+	/* background-color: rgba(219, 192, 36, 0.541); */
+	width: 900px;
+	height: 400px;
+	top: 450px;
+	left:800px;
+	position: absolute;
+}
+#abstract1{
+	/* background-color: rgba(219, 192, 36, 0.9); */
+	width: 500px;
+	height: 300px;
+	top: 1520px;
+	left:190px;
+	position: absolute;
+}
+#abstract2{
+	/* background-color: rgba(219, 192, 36, 0.9); */
+	width: 500px;
+	height: 300px;
+	top: 1520px;
+	left:1300px;
+	position: absolute;
+}
+
 #all{
-	top:100px;
+	top:200px;
 	position: absolute;
 }
