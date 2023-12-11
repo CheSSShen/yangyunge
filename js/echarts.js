@@ -706,7 +706,7 @@ function echarts03(data) {
 		series: {
 			type: "sunburst",
 			label: {
-				fontSize: 15,
+				fontSize: 14,
 			},
 			data: [{
 					name: "21212",
@@ -934,7 +934,7 @@ function echartsActualPreference(data){
 		series: {
 			type: "sunburst",
 			label: {
-				fontSize: 15,
+				fontSize: 14,
 			},
 			data: [
 				{

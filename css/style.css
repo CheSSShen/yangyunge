@@ -82,6 +82,15 @@ p{
 	left: 150px;
 	position:absolute;
 }
+
+#creators{
+	width: 400px;
+	height: 100px;
+	bottom: -1800px;
+	left: 40%;
+	position:absolute;
+}
+
 #bg{
 	opacity: 0.25;
 	width: 600px;
