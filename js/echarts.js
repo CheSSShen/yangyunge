@@ -109,6 +109,8 @@ function readFile(files) {
 			echarts02(coffeeB_Notes, 'wordcloudCoffeeB','Medium roast');
 			echarts02(coffeeC_Notes, 'wordcloudCoffeeC','Dark roast');
 			echarts02(coffeeD_Notes, 'wordcloudCoffeeD','Light roast, natural process');
+			echartsActualPreference(descriptorPreference);
+			console.log(descriptorPreference);
 		});
 }
 
@@ -902,6 +904,305 @@ function echarts03(data) {
 		option.series.data[i].children[2].value = x(data[i].coffeeC);
 		option.series.data[i].children[3].name = "coffeeD";
 		option.series.data[i].children[3].value = x(data[i].coffeeD);
+		console.log(x(data[i].coffeeA) + "-" + x(data[i].coffeeB) + "-" + x(data[i].coffeeC) + "-" + x(data[i]
+			.coffeeD));
+	}
+	myChart.setOption(option);
+}
+
+function echartsActualPreference(data){
+	var myChart = echarts.init(document.getElementById("describe"));
+	var option = {
+		color: ['#465da3', '#73a35d', '#bfa549', '#c55959', '#609fb8', '#2c7855', '#d1764b', '#9a606c', '#bc64a4'],
+		tooltip: {
+			trigger: 'item',
+			textStyle: {
+				fontSize: 20,
+				color: '#412d24',
+			},
+		},
+		title: {
+			text: "Descriptors of perceived preferences VS actual preference",
+			bottom: '5%',
+			left: 'center',
+			textStyle: {
+				fontSize: 25,
+				align: 'center',
+				color: '#412d24',
+			},
+		},
+		series: {
+			type: "sunburst",
+			label: {
+				fontSize: 15,
+			},
+			data: [
+				{
+					name: "",
+					children: [{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						}
+					]
+
+				},
+				{
+					name: "",
+					children: [{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						}
+					]
+
+				},
+				{
+					name: "21212",
+					children: [{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						}
+					]
+
+				},
+				{
+					name: "21212",
+					children: [{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						}
+					]
+
+				},
+				{
+					name: "21212",
+					children: [{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						}
+					]
+
+				},
+				{
+					name: "21212",
+					children: [{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						}
+					]
+
+				},
+				{
+					name: "21212",
+					children: [{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						}
+					]
+
+				},
+				{
+					name: "21212",
+					children: [{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						}
+					]
+
+				},
+				{
+					name: "21212",
+					children: [{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						}
+					]
+
+				},
+				{
+					name: "21212",
+					children: [{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						},
+						{
+							name: "",
+							value: 1
+						}
+					]
+
+				}
+			],
+			radius: [0, '95%'],
+			sort: undefined,
+			emphasis: {
+				focus: 'descendant',
+				label:{
+					fontSize:20,
+				},
+				itemStyle:{
+					borderRadius:['20%','50%']
+				}
+			},
+			levels: [{},
+				{
+					r0: '15%',
+					r: '45%',
+					itemStyle: {
+						borderWidth: 1,
+					},
+					label: {
+						rotate: 'tangential'
+					}
+				},
+				{
+					r0: '45%',
+					r: '70%',
+					label: {
+						align: 'center'
+					}
+				}
+			]
+		}
+	}
+	// 线性比例尺 Linear Scales
+	// 线性比例尺 Linear Scales 值域中的值 yyy 与定义域中的值 xxx 通过表达式 y=mx+by=mx+by=mx+b 联系起来，
+	// 这种映射方式可以在视觉元素的变量中保留数据的原始差异比例
+	// 使用方法 d3.scaleLinear(domain, range) 构建一个线性比例尺，
+	// 入参是可选的，如果忽略则定义域和值域范围默认是 [0, 1]，也可以在之后通过 continuous.domain(value) 和 continuous.range(value) 设置定义域和值域。
+
+	//对数比例尺
+	const x = d3.scaleLinear()
+		.domain([1, 953])
+		.range([1, 200]);
+
+	for (var i = 2; i < data.length	; i++) {
+		j = i - 2;
+		console.log(data[i].keyWord);
+		option.series.data[j].name = data[i].keyWord;
+		option.series.data[j].children[0].name = "coffeeA";
+		option.series.data[j].children[0].value = x(data[i].coffeeA);
+		option.series.data[j].children[1].name = "coffeeB";
+		option.series.data[j].children[1].value = x(data[i].coffeeB);
+		option.series.data[j].children[2].name = "coffeeC";
+		option.series.data[j].children[2].value = x(data[i].coffeeC);
+		option.series.data[j].children[3].name = "coffeeD";
+		option.series.data[j].children[3].value = x(data[i].coffeeD);
 		console.log(x(data[i].coffeeA) + "-" + x(data[i].coffeeB) + "-" + x(data[i].coffeeC) + "-" + x(data[i]
 			.coffeeD));
 	}
