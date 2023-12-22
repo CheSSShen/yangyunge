@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "browserify-fs": "^1.0.0"
+    "browserify-fs": "^1.0.0",
+    "live-server-https": "^0.0.2"
   }
 }
