@@ -15,12 +15,13 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<!-- 引入D3.js -->
 		<script src="https://d3js.org/d3.v7.min.js"></script>
-
+		
 		<!-- dsdadasd -->
 
 
 	</head>
 	<body>
+		<input type="file" onchange="readFile(this.files)"/>
 		<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
 		<div id="title">
 			<h1 style="font-size: 10ex;text-align: left;color:#6d6943;font-style:italic;">
@@ -49,8 +50,9 @@
 			</p>
 		</div>
 
-		<div id="all" style="height: 1500px;">
+		<div id="all" style="height: 1800px;">
 			<div id="expertise"></div>
+			<div id="brewWayPreference"></div>
 			<div id="genderRatio"></div>
 			<div id="drinkReason"></div>
 			<div id="brewMethod"></div>
