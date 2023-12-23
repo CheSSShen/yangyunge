@@ -1,72 +1,84 @@
 body {
 	background: #d3b795;
 }
-h1{
+
+h1 {
 	color: #6d6943;
 }
-h2{
+
+h2 {
 	color: #6d6943
 }
-p{
+
+p {
 	color: #6d6943
 }
-#icons{
+
+#icons {
 	width: 1500px;
 	height: 50px;
 	top: 1060px;
 	left: 150px;
 	position: relative;
 }
-#pourOver{
+
+#pourOver {
 	width: 50px;
 	height: 50px;
 	top: 0px;
 	left: 170px;
 	position: relative;
 }
-#espresso{
+
+#espresso {
 	width: 50px;
 	height: 50px;
 	top: 0px;
 	left: 250px;
 	position: relative;
 }
-#frenchPress{
+
+#frenchPress {
 	width: 50px;
 	height: 50px;
 	top: 0px;
 	left: 330px;
 	position: relative;
 }
-#moka{
+
+#moka {
 	width: 50px;
 	height: 50px;
 	top: 0px;
 	left: 420px;
 	position: relative;
 }
-#capusle{
+
+#capusle {
 	width: 50px;
 	height: 50px;
 	top: 0px;
 	left: 775px;
 	position: relative;
 }
-#instant{
+
+#instant {
 	width: 50px;
 	height: 50px;
 	top: 0px;
 	left: 940px;
 	position: relative;
 }
-#bottle{
+
+#bottle {
 	width: 50px;
 	height: 50px;
 	top: 0px;
 	left: 750px;
 	position: relative;
 }
-#bean-to-cup{
+
+#bean-to-cup {
 	width: 50px;
 	height: 50px;
 	top: 0px;
@@ -74,87 +86,90 @@ p{
 	position: relative;
 }
 
-#title{
+#title {
 	/* background-color: rgb(11, 124, 236,150); */
 	width: 800px;
 	height: 100px;
 	top: -30px;
 	left: 150px;
-	position:absolute;
+	position: absolute;
 }
 
-#creators{
+#creators {
 	width: 400px;
 	height: 100px;
-	bottom: -1800px;
-	left: 40%;
-	position:absolute;
+	top: 3200px;
+	left: 800px;
+	position: absolute;
 }
 
-#bg{
+#bg {
 	opacity: 0.25;
 	width: 600px;
 	height: 600px;
 	top: 30px;
 	left: 1000px;
-	position:absolute;
+	position: absolute;
 }
+
 #genderRatio {
 	/* background-color: #1a1817; */
 	width: 400px;
 	height: 400px;
 	top: 0px;
 	left: 180px;
-	position: relative;
+	position: absolute;
 }
 
 #drinkReason {
 	/* background-color: #f11313; */
 	width: 400px;
 	height: 400px;
-	top: -400px;
-	left:760px;
-	position: relative;
+	top: 0px;
+	left: 760px;
+	position: absolute;
 }
+
 #favoriteDrink {
 	/* background-color: rgb(11, 124, 236); */
 	width: 400px;
 	height: 400px;
-	top: -800px;
+	top: 0px;
 	left: 1340px;
-	position: relative;
+	position: absolute;
 }
-#wordcloudCoffeeA{
+
+#wordcloudCoffeeA {
 	/* background-color: #c495d3; */
 	width: 400px;
-	height:400px;
+	height: 400px;
 	top: 960px;
 	left: 144px;
 	position: absolute;
 }
 
-#wordcloudCoffeeB{
+#wordcloudCoffeeB {
 	/* background-color: #915f23; */
 	width: 400px;
-	height:400px;
+	height: 400px;
 	top: 960px;
 	left: 588px;
 	position: absolute;
 }
 
-#wordcloudCoffeeC{
+#wordcloudCoffeeC {
 	/* background-color: #d3b795; */
 	width: 400px;
-	height:400px;
+	height: 400px;
 	top: 960px;
 	left: 1032px;
 	position: absolute;
 }
 
-#wordcloudCoffeeD{
+#wordcloudCoffeeD {
 	/* background-color: #d3b795; */
 	width: 400px;
-	height:400px;
+	height: 400px;
 	top: 960px;
 	left: 1476px;
 	position: absolute;
@@ -165,61 +180,75 @@ p{
 	width: 1720px;
 	height: 600px;
 	top: 350px;
-	left:100px;
+	left: 100px;
 	position: absolute;
 }
 
 
-#sunburst{
+#sunburst {
 	/* background-color: #acd39527; */
 	width: 760px;
-	height:760px;
-	top:1660px;
+	height: 760px;
+	top: 1660px;
 	left: 150px;
 	position: absolute;
 }
-#describe{
+
+#describe {
 	/* background-color: #86541731; */
 	width: 760px;
-	height:760px;
-	top:1660px;
-	left:1010px;
+	height: 760px;
+	top: 1660px;
+	left: 1010px;
 	position: absolute;
 }
+
 #expertise {
 	/* background-color: #95d3bf; */
 	width: 600px;
 	height: 400px;
 	top: 1380px;
-	left:660px;
+	left: 660px;
 	position: absolute;
 }
-#introduction{
+
+#introduction {
 	/* background-color: rgba(219, 192, 36, 0.541); */
 	width: 900px;
 	height: 400px;
 	top: 450px;
-	left:800px;
-	position: absolute;
-}
-#abstract1{
-	/* background-color: rgba(219, 192, 36, 0.9); */
-	width: 500px;
-	height: 300px;
-	top: 1520px;
-	left:190px;
-	position: absolute;
-}
-#abstract2{
-	/* background-color: rgba(219, 192, 36, 0.9); */
-	width: 500px;
-	height: 300px;
-	top: 1520px;
-	left:1300px;
+	left: 800px;
 	position: absolute;
 }
 
-#all{
-	top:200px;
+#abstract1 {
+	/* background-color: rgba(219, 192, 36, 0.9); */
+	width: 500px;
+	height: 300px;
+	top: 1520px;
+	left: 190px;
+	position: absolute;
+}
+
+#abstract2 {
+	/* background-color: rgba(219, 192, 36, 0.9); */
+	width: 500px;
+	height: 300px;
+	top: 1520px;
+	left: 1300px;
+	position: absolute;
+}
+
+#brewWayPreference {
+/* 	background-color: rgba(219, 192, 36, 0.9); */
+	width: 1200px;
+	height: 500px;
+	top: 2450px;
+	left: 300px;
+	position: abosulte;
+}
+
+#all {
+	top: 200px;
 	position: absolute;
 }
