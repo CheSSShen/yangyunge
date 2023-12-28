@@ -631,6 +631,13 @@ function echarts01(data) {
 		},
 		tooltip: {
 			trigger: 'axis',
+			formatter(params){
+				var reVal = params[0].name;
+				for(var i=0,l=params.length;i<l;i++){
+					reVal +='<br/>' + params[i].marker + params[i].seriesName + ' : ' +Number(params[i].value).toFixed(0)+'%'
+				}
+				return reVal;
+			},
 			axisPointer: {
 				// Use axis to trigger tooltip
 				type: 'shadow', // 'shadow' as default; can also be 'line' or 'shadow'
@@ -826,11 +833,12 @@ function echarts03(data) {
 	var option = {
 		color: ['#465da3', '#73a35d', '#bfa549', '#c55959', '#609fb8', '#2c7855', '#d1764b', '#9a606c', '#bc64a4'],
 		tooltip: {
+			valueFormatter: (value) =>value.toFixed(0),
 			trigger: 'item',
 			textStyle: {
 				fontSize: 20,
 				color: '#412d24',
-			},
+			}
 		},
 		title: {
 			text: "Perceived roast preference VS actual preference",
@@ -1054,6 +1062,7 @@ function echartsActualPreference(data) {
 	var option = {
 		color: ['#465da3', '#73a35d', '#bfa549', '#c55959', '#609fb8', '#2c7855', '#d1764b', '#9a606c', '#bc64a4'],
 		tooltip: {
+			valueFormatter: (value) =>value.toFixed(0),
 			trigger: 'item',
 			textStyle: {
 				fontSize: 20,
@@ -1363,14 +1372,20 @@ function echartsBrewWayPreference(data) {
 			},
 		},
 		tooltip: {
+			
 			trigger: 'axis',
+			formatter(params){
+				var reVal = params[0].name;
+				for(var i=0,l=params.length;i<l;i++){
+					reVal +='<br/>' + params[i].marker + params[i].seriesName + ' : ' +Number(params[i].value).toFixed(0)+'%'
+				}
+				return reVal;
+			},
 			axisPointer: {
 				// Use axis to trigger tooltip
 				type: 'shadow', // 'shadow' as default; can also be 'line' or 'shadow'
 				label: {
-					formatter: function(params) {
-						return "Brew Way:" + params.value;
-					},
+					
 				}
 			},
 			textStyle: {
