@@ -1,125 +1,3 @@
-// function readTextFile(filePath, callback) {
-// 	const xhrFile = new XMLHttpRequest();
-// 	xhrFile.open("GET", filePath, true);
-// 	xhrFile.onload = function () {
-// 		const allText = xhrFile.response;
-// 		callback(allText)
-// 	}
-// 	xhrFile.send();
-// }
-// readTextFile("coffee.csv", (data) => {
-// 	var results = Papa.parse(data, {
-// 		header: true, // 如果你的CSV文件包含表头，设置为true
-// 		dynamicTyping: true, // 如果你希望自动将字符串转换为数字或日期，设置为true
-// 	});
-
-// 	var totalTestersNumber = 0; //测试者总数
-// 	results.data.forEach((row) => {
-// 		if (row) {
-// 			totalTestersNumber++;
-// 		};
-// 	})
-// 	//---------------------------男女比例(饼图)------------------------
-// 	var malePercent = getColKeyWorsNum(results, 'Gender', 'Male');
-// 	var femalePercent = getColKeyWorsNum(results, 'Gender', 'Female');
-// 	//---------------------------在家煮咖啡的方式（条形图）------------------------
-// 	var hBAH = getMyCol(results, "How do you brew coffee at home?"); //每个人的回答，回答中可能有多个关键词
-// 	var finalHowBrewAtHome = getNorepeatKeyWordsDict(hBAH);
-// 	/* 
-// 	最终的brewWay数组，每个元素为字典
-// 	如{
-// 		keyword:"Espresso",
-// 		num:500,
-// 	}
-// 	*/
-// 	//---------------------------最爱的咖啡饮品(雷达图)------------------------
-// 	var fD = getMyCol(results, "What is your favorite coffee drink?");
-// 	var favoriteDrink = getNorepeatKeyWordsDict(fD);
-// 	/*
-// 	如{
-// 		keyword:"Lattee",
-// 		num:500,
-// 	}
-// */
-// 	//---------------------------饮用咖啡的原因（南丁格尔玫瑰图）------------------------
-// 	var dR = getMyCol(results, "Why do you drink coffee?");
-// 	var drinkReason = getNorepeatKeyWordsDict(dR);
-// 	//---------------------------自评专业等级与口味偏好（堆叠条形图）------------------------
-// 	var levelPreference = [];
-// 	/*
-// 	每种自评专业等级下，四种偏爱口味分别占多少人。
-// 	形如：
-// 	{
-// 		keyWord: 1,
-// 		coffeeA: 20,
-// 		coffeeB: 19,
-// 		coffeeC: 60,
-// 		coffeeD: 11,
-// 	}
-// 	*/
-// 	for (var i = 0; i < 10; i++) {
-// 		var cur = {
-// 			keyWord: i + 1,
-// 		}
-// 		levelPreference.push(cur);
-// 	}
-// 	processTwoColValueDict(results, "Lastly, how would you rate your own coffee expertise?",
-// 		"Lastly, what was your favorite overall coffee?", levelPreference);
-// 	//---------------------------自认为偏好的烘焙度与实际的口味偏好(旭日图)------------------------
-// 	var rP = getMyCol(results, "What roast level of coffee do you prefer?");
-// 	var roastPreference = getNorepeatKeyWordsDict(rP);
-// 	/*
-// 	形如：{
-// 		keyWord:"Light",
-// 		num:100,
-// 		coffeeA:0,
-// 		coffeeB:0,
-// 		coffeeC:0,
-// 		coffeeD:0,
-// 	}
-// 	*/
-// 	roastPreference = processTwoColValueDict(results, "What roast level of coffee do you prefer?",
-// 		"Lastly, what was your favorite overall coffee?", roastPreference);
-// 	//---------------------------自认为偏好的形容词与实际的口味偏好（日历图）------------------------
-// 	var descriptorPreference = getNorepeatKeyWordsDict(getMyCol(results,
-// 		"Before today's tasting, which of the following best described what kind of coffee you like?"
-// 	));
-// 	descriptorPreference = processTwoColValueDict(results,
-// 		"Before today's tasting, which of the following best described what kind of coffee you like?",
-// 		"Lastly, what was your favorite overall coffee?",
-// 		descriptorPreference
-// 	);
-// 	//---------------------------四类咖啡的词云（词云图）------------------------
-// 	var coffeeA_Notes = getNorepeatKeyWordsDict(getMyCol(results, "Coffee A - Notes"));
-// 	processNotes(coffeeA_Notes);
-// 	/*
-// 	{
-// 		keyWord:"Fruity",
-// 		num:200
-// 	}
-// 	*/
-// 	var coffeeB_Notes = getNorepeatKeyWordsDict(getMyCol(results, "Coffee B - Notes"));
-// 	processNotes(coffeeB_Notes);
-// 	var coffeeC_Notes = getNorepeatKeyWordsDict(getMyCol(results, "Coffee C - Notes"));
-// 	processNotes(coffeeC_Notes);
-// 	var coffeeD_Notes = getNorepeatKeyWordsDict(getMyCol(results, "Coffee D - Notes"));
-// 	processNotes(coffeeD_Notes);
-// 	//---------------------------ECHARTS部分------------------------
-// 	echarts01(levelPreference);
-// 	echartsGenderRatio(malePercent, femalePercent);
-// 	echartsDrinkReason(drinkReason);
-// 	echartsBrewingMethod(finalHowBrewAtHome);
-// 	echartsFavoriteDrink(favoriteDrink);
-// 	echarts03(roastPreference);
-// 	echarts02(coffeeA_Notes, 'wordcloudCoffeeA','Light roast, washed process');
-// 	echarts02(coffeeB_Notes, 'wordcloudCoffeeB','Medium roast');
-// 	echarts02(coffeeC_Notes, 'wordcloudCoffeeC','Dark roast');
-// 	echarts02(coffeeD_Notes, 'wordcloudCoffeeD','Light roast, natural process');
-// 	echartsActualPreference(descriptorPreference);
-// 	console.log(descriptorPreference);
-// })
-
-
 function readFile(files) {
 	Z.readAsText(files,
 		function(data) {
@@ -226,17 +104,17 @@ function readFile(files) {
 			var coffeeD_Notes = getNorepeatKeyWordsDict(getMyCol(results, "Coffee D - Notes"));
 			processNotes(coffeeD_Notes);
 			//---------------------------ECHARTS部分------------------------
-			echarts01(levelPreference);
+			echartsBrewWayBar(levelPreference);
 			echartsGenderRatio(genderRatio);
 			echartsDrinkReason(drinkReason);
 			echartsBrewingMethod(finalHowBrewAtHome);
 			echartsFavoriteDrink(favoriteDrink);
 
-			echarts03(roastPreference);
-			echarts02(coffeeA_Notes, 'wordcloudCoffeeA', 'Light roast, washed process');
-			echarts02(coffeeB_Notes, 'wordcloudCoffeeB', 'Medium roast');
-			echarts02(coffeeC_Notes, 'wordcloudCoffeeC', 'Dark roast');
-			echarts02(coffeeD_Notes, 'wordcloudCoffeeD', 'Light roast, natural process');
+			echartsSunburst_left(roastPreference);
+			echartsWordCloud(coffeeA_Notes, 'wordcloudCoffeeA', 'Light roast, washed process');
+			echartsWordCloud(coffeeB_Notes, 'wordcloudCoffeeB', 'Medium roast');
+			echartsWordCloud(coffeeC_Notes, 'wordcloudCoffeeC', 'Dark roast');
+			echartsWordCloud(coffeeD_Notes, 'wordcloudCoffeeD', 'Light roast, natural process');
 			echartsActualPreference(descriptorPreference);
 			echartsBrewWayPreference(brewWayPreference);
 			console.log(brewWayPreference);
@@ -618,7 +496,7 @@ function echartsFavoriteDrink(data) {
 	myChart.setOption(option);
 }
 
-function echarts01(data) {
+function echartsBrewWayBar(data) {
 	var myChart = echarts.init(document.getElementById('expertise'));
 	// 指定图表的配置项和数据
 	var option = {
@@ -764,7 +642,7 @@ function echarts01(data) {
 	myChart.setOption(option);
 }
 
-function echarts02(data, divID, intro) {
+function echartsWordCloud(data, divID, intro) {
 	var myChart = echarts.init(document.getElementById(divID));
 	var keywords = [];
 	for (var i = 0; i < data.length; i++) {
@@ -832,7 +710,7 @@ function echarts02(data, divID, intro) {
 	window.onresize = myChart.resize;
 }
 
-function echarts03(data) {
+function echartsSunburst_left(data) {
 	var myChart = echarts.init(document.getElementById('sunburst'));
 	var option = {
 		color: ['#465da3', '#73a35d', '#bfa549', '#c55959', '#609fb8', '#2c7855', '#d1764b', '#9a606c', '#bc64a4'],
