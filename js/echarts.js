@@ -243,6 +243,8 @@ function readFile(files) {
 		});
 }
 
+//---------------------------数据处理函数------------------------
+
 function getMyCol(results, columnName) //需要传入papaparse的ret和某列的表头名字符串，以获取某一列的数据，返回为该列的一个数据数组。
 {
 	var columnValues = [];
@@ -310,7 +312,7 @@ function processTwoColValueDict(results, col1, col2, dic) {
 		var col2Value = results.data[i][col2];
 		var index = -1;
 		for (var j = 0; j < dict.length; j++) { //遍历关键词字典
-			if (col1Value && dict[j].keyWord == col1Value) {
+			if (col1Value && (dict[j].keyWord == col1Value || col1Value.toString().includes(dict[j].keyWord))) {
 				index = j; //取出co1Value对应字典中的索引是多少
 				break;
 			}
@@ -368,6 +370,8 @@ function sortArr(myData) {
 		}
 	}
 }
+
+//---------------------------ECHARTS绘图函数------------------------
 
 function echartsGenderRatio(data) {
 	var myChart = echarts.init(document.getElementById('genderRatio'));
@@ -1396,7 +1400,7 @@ function echartsBrewWayPreference(data) {
 		legend: {
 			right: '0%',
 			textStyle: {
-				fontSize:15,
+				fontSize: 15,
 				color: '#412d24',
 			}
 		},
@@ -1484,7 +1488,7 @@ function echartsBrewWayPreference(data) {
 		]
 	};
 	for (var i = 0; i < 4; i++) {
-		for (var j = 0; j < 10; j++) {
+		for (var j = 9; j >=0; j--) {
 			var allNum = (data[j].coffeeA + data[j].coffeeB + data[j].coffeeC + data[j].coffeeD);
 			if (i == 0) {
 				option.series[i].data.push((data[j].coffeeA / allNum * 100).toFixed(2));
@@ -1497,7 +1501,7 @@ function echartsBrewWayPreference(data) {
 			}
 		}
 	}
-	for (var i = data.length-1; i >= 0; i--) {
+	for (var i = data.length - 1; i >= 0; i--) {
 		option.yAxis.data.push(data[i].keyWord);
 	}
 	// 使用刚指定的配置项和数据显示图表。
